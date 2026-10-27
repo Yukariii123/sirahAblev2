@@ -1,8 +1,8 @@
 # Python Virtual Environment
-**/.venv/
-**/venv/
-**/ENV/
-**/__pycache__/
+.venv/
+venv/
+ENV/
+__pycache__/
 *.pyc
 
 # IDE & Editor
@@ -12,7 +12,7 @@
 *.swo
 
 # Temporary & Scratch files
-**/scratch/
+scratch/
 *.log
 
 # OS generated

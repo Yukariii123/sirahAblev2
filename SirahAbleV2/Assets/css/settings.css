@@ -1,0 +1,109 @@
+/* ==================================================
+   SIRAHABLE — STYLESHEET UNTUK LAMAN TETAPAN AKAUN
+   ================================================== */
+
+.settings-theme {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-primary);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.settings-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 8rem 2rem 4rem 2rem;
+}
+
+.settings-container {
+    width: 100%;
+    max-width: 480px;
+}
+
+.settings-form-card {
+    padding: 2.5rem;
+    border-radius: 16px;
+    animation: fadeInFromBottom 0.8s ease-out forwards;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-header .rub-el-hizb {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.form-header h2 {
+    font-family: var(--font-title);
+    font-weight: 700;
+    font-size: 1.75rem;
+    color: var(--color-gold);
+    margin-bottom: 0.5rem;
+}
+
+.form-header p {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+#form-change-password .form-group {
+    margin-bottom: 1.25rem;
+}
+
+#form-change-password label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text-secondary);
+}
+
+#form-change-password input {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: rgba(6, 13, 26, 0.7);
+    border: 1px solid var(--color-surface-border);
+    border-radius: 8px;
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#form-change-password input:focus {
+    outline: none;
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+}
+
+.form-feedback-msg {
+    font-size: 0.9rem;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 1.25rem;
+    text-align: center;
+    display: none; /* Initially hidden */
+}
+
+.form-feedback-msg.error {
+    background-color: rgba(255, 107, 107, 0.1);
+    color: #FF6B6B;
+    border: 1px solid #FF6B6B;
+    display: block;
+}
+
+.form-feedback-msg.success {
+    background-color: rgba(78, 204, 163, 0.1);
+    color: #4ECCA3;
+    border: 1px solid #4ECCA3;
+    display: block;
+}

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDUSYS — Portal Belajar & Nota Pintar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Assets/css/homepage.css">
+
+    <style>
+        :root {
+            --bg-color: #040810;
+            --text-color: #F1F5F9;
+            --panel-bg: rgba(10, 20, 38, 0.8);
+            --panel-bg-solid: #0A1526;
+            --border-color: rgba(212, 175, 55, 0.3);
+            --gold: #D4AF37;
+            --gold-soft: rgba(212, 175, 55, 0.12);
+            --ai-teal: #4ECCA3;
+            --ai-teal-soft: rgba(78, 204, 163, 0.12);
+            --danger: #E8604C;
+            --danger-soft: rgba(232, 96, 76, 0.12);
+            --muted: #8895A7;
+            --radius: 12px;
+            --font-scale: 1;
+        }
+        body.focus-mode {
+            --bg-color: #000000;
+            --panel-bg: #0A0A0A;
+            --panel-bg-solid: #0A0A0A;
+            --border-color: #222;
+            --text-color: #A0AAB5;
+            --muted: #5C6672;
+        }
+
+        * { box-sizing: border-box; }
+        body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color .35s ease, color .35s ease; margin: 0; }
+
+        /* ===================== TOP READING-PROGRESS RAIL ===================== */
+        .reading-rail { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, var(--gold), var(--ai-teal)); z-index: 999; transition: width .12s linear; }
+
+        .learn-container { max-width: 1300px; margin: 0 auto 60px; padding: 0 20px; display: grid; grid-template-columns: 300px 1fr; gap: 30px; }
+
+        /* ===================== HEADER ===================== */
+        .learn-header { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding: 24px 0 20px; position: sticky; top: 0; background: var(--bg-color); z-index: 50; }
+        .edusys-title { font-weight: 800; font-size: 2rem; color: #FFF; margin: 0; letter-spacing: .3px; }
+        .edusys-title span { color: var(--gold); }
+        .edusys-title small { font-size: 1.1rem; font-weight: 400; color: var(--muted); margin-left: 6px; }
+        .btn-back { padding: 10px 20px; background: rgba(255,255,255,0.05); color: #94A3B8; text-decoration: none; border-radius: 8px; border: 1px solid var(--border-color); font-size: .9rem; white-space: nowrap; }
+        .btn-back:hover { color: #040810; background: var(--gold); }
+
+        /* ===================== SIDEBAR ===================== */
+        .sidebar { background: var(--panel-bg); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 20px; height: fit-content; position: sticky; top: 100px; }
+        .sidebar h3 { color: var(--gold); font-family: 'Cinzel', serif; margin: 0 0 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; font-size: 1.05rem; letter-spacing: .5px; }
+
+        /* Lampu Ilmu — signature progress lamp */
+        .ilmu-meter { display: flex; align-items: center; gap: 14px; background: rgba(0,0,0,0.35); border: 1px solid var(--border-color); border-radius: 10px; padding: 14px; margin-bottom: 18px; }
+        .lamp-wrap { width: 40px; height: 52px; position: relative; flex-shrink: 0; }
+        .lamp-wrap svg { width: 100%; height: 100%; display: block; }
+        .lamp-flame { transform-origin: 20px 14px; animation: flicker 2.4s ease-in-out infinite; filter: drop-shadow(0 0 4px var(--gold)); }
+        @keyframes flicker { 0%,100% { transform: scale(1) translateY(0); opacity: .95; } 50% { transform: scale(1.08) translateY(-1px); opacity: 1; } }
+        .ilmu-meter-text { flex: 1; }
+        .ilmu-meter-text .label { font-size: .72rem; text-transform: uppercase; letter-spacing: .8px; color: var(--muted); display: block; margin-bottom: 4px; }
+        .ilmu-meter-text .pct { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.3rem; font-weight: 700; }
+        .ilmu-bar-track { height: 5px; background: rgba(255,255,255,0.08); border-radius: 4px; margin-top: 8px; overflow: hidden; }
+        .ilmu-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--gold), #F3D97A); transition: width .5s ease; }
+
+        .module-list { list-style: none; padding: 0; margin: 0; }
+        .module-list li { padding: 12px 14px; border-radius: 8px; margin-bottom: 8px; cursor: pointer; transition: .2s; color: var(--text-color); border: 1px solid transparent; display: flex; align-items: center; gap: 10px; font-size: .93rem; }
+        .module-list li:hover { background: var(--gold-soft); border-color: var(--gold); }
+        .module-list li.active { background: var(--gold); color: #040810; font-weight: 700; }
+        .module-list li.active .mod-check { border-color: #040810; }
+        .module-list li .mod-name { flex: 1; }
+        .mod-check { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--border-color); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: .65rem; }
+        .module-list li.done .mod-check { background: var(--ai-teal); border-color: var(--ai-teal); color: #040810; }
+        .module-list li.locked { opacity: .45; cursor: not-allowed; }
+
+        .sidebar-hint { font-size: .78rem; color: var(--muted); margin-top: 14px; line-height: 1.5; border-top: 1px dashed var(--border-color); padding-top: 12px; }
+
+        /* ===================== CONTENT AREA ===================== */
+        .content-area { background: var(--panel-bg); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 40px; position: relative; }
+
+        .smart-tools { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; }
+        .tool-btn { flex: 1; min-width: 140px; padding: 10px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: var(--gold); border-radius: 6px; cursor: pointer; font-weight: 600; font-size: .85rem; transition: .2s; display: flex; justify-content: center; align-items: center; gap: 8px; font-family: inherit; }
+        .tool-btn:hover { background: rgba(212, 175, 55, 0.2); }
+        .tool-btn.ai-btn { background: var(--ai-teal-soft); border-color: var(--ai-teal); color: var(--ai-teal); }
+        .tool-btn.ai-btn:hover { background: var(--ai-teal); color: #040810; }
+        .tool-btn:disabled { opacity: .6; cursor: wait; }
+
+        /* Font size + utility row */
+        .util-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; gap: 12px; flex-wrap: wrap; }
+        .font-ctrl { display: flex; align-items: center; gap: 6px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 8px; padding: 4px; }
+        .font-ctrl button { width: 30px; height: 30px; border-radius: 6px; border: none; background: transparent; color: var(--text-color); cursor: pointer; font-weight: 700; font-size: .95rem; }
+        .font-ctrl button:hover { background: var(--gold-soft); color: var(--gold); }
+        .search-box { position: relative; flex: 1; min-width: 180px; max-width: 260px; }
+        .search-box input { width: 100%; padding: 8px 12px 8px 34px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); font-family: inherit; font-size: .85rem; }
+        .search-box input::placeholder { color: var(--muted); }
+        .search-box .icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: .85rem; opacity: .6; }
+        .search-count { font-size: .75rem; color: var(--muted); white-space: nowrap; }
+        mark.hit { background: var(--gold); color: #040810; border-radius: 2px; }
+        mark.hit.current { background: var(--ai-teal); }
+
+        .ai-summary-box { display: none; background: var(--ai-teal-soft); border-left: 4px solid var(--ai-teal); padding: 20px; border-radius: 8px; margin-bottom: 30px; }
+        .ai-summary-box h4 { color: var(--ai-teal); margin: 0 0 10px; display: flex; align-items: center; gap: 8px; font-size: 1rem; }
+        .ai-summary-box ul { padding-left: 20px; color: #E2E8F0; line-height: 1.7; margin: 0; }
+
+        .article-title { font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 2.4vw, 2.2rem); color: #FFF; margin-bottom: 15px; }
+        .article-meta { color: #94A3B8; font-size: .85rem; margin-bottom: 30px; display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+        .article-meta .dot { opacity: .5; }
+        .article-body { font-size: calc(1.1rem * var(--font-scale)); line-height: 1.85; color: var(--text-color); }
+        .article-body p { margin-bottom: 20px; }
+        .article-body p::selection { background: var(--gold-soft); color: var(--gold); }
+
+        .highlight { background: var(--gold-soft); border-bottom: 2px solid var(--gold); border-radius: 2px; padding: 0 1px; cursor: pointer; }
+        .tts-active-reading { background: rgba(212, 175, 55, 0.12) !important; border-left: 3px solid var(--gold) !important; padding-left: 14px !important; border-radius: 4px; transition: all 0.3s ease; }
+        .tool-btn.reading-active { background: var(--gold) !important; color: #040810 !important; font-weight: 700; box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
+        .voice-select { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); color: var(--gold); border-radius: 8px; padding: 8px 12px; font-size: 0.88rem; font-family: inherit; cursor: pointer; outline: none; transition: all 0.2s ease; }
+        .voice-select:hover, .voice-select:focus { border-color: var(--gold); background: rgba(212, 175, 55, 0.1); }
+        .voice-select option { background: #0B132B; color: #FFF; }
+
+        /* Floating highlight popover */
+        .hl-popover { position: absolute; display: none; background: #10182B; border: 1px solid var(--gold); border-radius: 8px; padding: 6px; gap: 6px; z-index: 200; box-shadow: 0 8px 24px rgba(0,0,0,.5); }
+        .hl-popover button { background: none; border: none; color: var(--text-color); font-size: .85rem; padding: 6px 10px; cursor: pointer; border-radius: 5px; }
+        .hl-popover button:hover { background: var(--gold-soft); color: var(--gold); }
+
+        /* Nota Peribadi */
+        .personal-notes { margin-top: 34px; border-top: 1px solid var(--border-color); padding-top: 22px; }
+        .personal-notes h4 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1rem; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
+        .personal-notes textarea { width: 100%; min-height: 90px; resize: vertical; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; color: var(--text-color); font-family: inherit; font-size: .9rem; line-height: 1.6; }
+        .personal-notes textarea:focus { outline: none; border-color: var(--gold); }
+        .save-status { font-size: .72rem; color: var(--muted); margin-top: 6px; height: 14px; }
+
+        /* Kuiz Ringkas */
+        .quiz-section { margin-top: 34px; border-top: 1px solid var(--border-color); padding-top: 22px; }
+        .quiz-section h4 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1rem; margin: 0 0 6px; }
+        .quiz-section .sub { color: var(--muted); font-size: .85rem; margin-bottom: 16px; }
+        .quiz-card { background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .quiz-q { font-weight: 600; margin-bottom: 12px; color: #FFF; }
+        .quiz-options { display: grid; gap: 8px; }
+        .quiz-opt { text-align: left; padding: 10px 12px; border-radius: 7px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.03); color: var(--text-color); cursor: pointer; font-family: inherit; font-size: .88rem; }
+        .quiz-opt:hover { border-color: var(--gold); }
+        .quiz-opt.correct { background: var(--ai-teal-soft); border-color: var(--ai-teal); color: var(--ai-teal); }
+        .quiz-opt.wrong { background: var(--danger-soft); border-color: var(--danger); color: var(--danger); }
+        .quiz-opt:disabled { cursor: default; }
+        .quiz-result { text-align: center; padding: 16px; font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.05rem; }
+        .quiz-result .btn-retry { display: inline-block; margin-top: 10px; padding: 8px 18px; background: var(--gold); color: #040810; border: none; border-radius: 7px; font-weight: 700; cursor: pointer; font-family: 'Plus Jakarta Sans'; }
+
+        /* Kad Imbas (Flashcards) */
+        .flash-overlay { display: none; position: fixed; inset: 0; background: rgba(2,5,12,0.85); backdrop-filter: blur(4px); z-index: 500; align-items: center; justify-content: center; padding: 20px; }
+        .flash-modal { width: 100%; max-width: 480px; }
+        .flash-modal-head { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: .8rem; margin-bottom: 14px; }
+        .flash-modal-head .close-flash { cursor: pointer; color: var(--muted); background: none; border: none; font-size: 1.3rem; line-height: 1; }
+        .flash-modal-head .close-flash:hover { color: var(--gold); }
+        .flashcard { background: var(--panel-bg-solid); border: 1px solid var(--gold); border-radius: 14px; min-height: 220px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 30px; cursor: pointer; perspective: 1000px; position: relative; }
+        .flashcard .face { font-size: 1.15rem; line-height: 1.6; color: #FFF; }
+        .flashcard .face.back { color: var(--ai-teal); display: none; }
+        .flashcard.flipped .face.front { display: none; }
+        .flashcard.flipped .face.back { display: block; }
+        .flashcard .tap-hint { position: absolute; bottom: 10px; font-size: .7rem; color: var(--muted); left: 0; right: 0; }
+        .flash-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; }
+        .flash-nav button { background: rgba(255,255,255,0.06); border: 1px solid var(--border-color); color: var(--text-color); padding: 9px 16px; border-radius: 8px; cursor: pointer; font-family: inherit; }
+        .flash-nav button:hover { border-color: var(--gold); color: var(--gold); }
+        .flash-nav .counter { color: var(--muted); font-size: .82rem; }
+
+        /* Pomodoro Timer — floating */
+        .study-timer { position: fixed; bottom: 20px; right: 20px; background: var(--panel-bg-solid); border: 1px solid var(--border-color); border-radius: 14px; padding: 14px 16px; z-index: 300; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.4); }
+        .study-timer .digits { font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--gold); min-width: 62px; text-align: center; }
+        .study-timer .timer-btn { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: var(--text-color); cursor: pointer; font-size: .8rem; }
+        .study-timer .timer-btn:hover { border-color: var(--gold); color: var(--gold); }
+        .study-timer .timer-label { font-size: .68rem; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+        .study-timer.collapsed .digits, .study-timer.collapsed .timer-actions { display: none; }
+        .study-timer .toggle-collapse { background: none; border: none; color: var(--muted); cursor: pointer; font-size: .9rem; }
+
+        @media (max-width: 860px) {
+            .learn-container { grid-template-columns: 1fr; }
+            .sidebar { position: static; }
+            .content-area { padding: 24px; }
+            .study-timer { right: 12px; bottom: 12px; }
+        }
+
+        [hidden] { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div class="reading-rail" id="reading-rail"></div>
+
+    <div class="learn-container">
+        <!-- HEADER -->
+        <header class="learn-header">
+            <h1 class="edusys-title">EDU<span>SYS</span><small>| Pusat Nota Pintar</small></h1>
+            <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                <a href="dashboard.html" class="btn-back">📊 Dashboard</a>
+                <a href="peta.html" class="btn-back" style="border-color:#38bdf8; color:#7dd3fc;">🗺️ Peta Empayar</a>
+                <a href="galeri.html" class="btn-back" style="border-color:#d4af37; color:#fef08a;">🏛️ Galeri Artifak</a>
+                <a href="minigames.html" class="btn-back">🧩 Mini-Games</a>
+                <a href="quiz.html" class="btn-back">⚔️ Arena Kuiz</a>
+                <a href="game.html" class="btn-back" style="background:rgba(212,175,55,0.18); border-color:#d4af37; color:#fef08a;">🎮 Pengembaraan 2D</a>
+            </div>
+        </header>
+
+        <!-- SIDEBAR SENARAI MODUL -->
+        <aside class="sidebar">
+            <h3>Senarai Modul</h3>
+
+            <div class="ilmu-meter" title="Lampu Ilmu — cahaya bertambah terang mengikut kemajuan belajar anda">
+                <div class="lamp-wrap">
+                    <svg viewBox="0 0 40 52">
+                        <ellipse cx="20" cy="46" rx="10" ry="3" fill="rgba(212,175,55,0.15)"/>
+                        <path d="M12 30 C12 20 28 20 28 30 C28 37 22 38 22 44 L18 44 C18 38 12 37 12 30 Z" fill="none" stroke="var(--border-color)" stroke-width="1.4"/>
+                        <rect x="17" y="44" width="6" height="4" rx="1" fill="none" stroke="var(--border-color)" stroke-width="1.2"/>
+                        <path id="lamp-flame" class="lamp-flame" d="M20 15 C24 20 24 26 20 29 C16 26 16 20 20 15 Z" fill="var(--gold)" opacity="0.15"/>
+                    </svg>
+                </div>
+                <div class="ilmu-meter-text">
+                    <span class="label">Lampu Ilmu</span>
+                    <span class="pct" id="ilmu-pct">0%</span>
+                    <div class="ilmu-bar-track"><div class="ilmu-bar-fill" id="ilmu-bar-fill"></div></div>
+                </div>
+            </div>
+
+            <ul class="module-list" id="module-list">
+                <li class="active" data-mod="1"><span class="mod-check">✓</span><span class="mod-name">Bab 1: Kebangkitan Abbasiyah</span></li>
+                <li data-mod="2"><span class="mod-check">✓</span><span class="mod-name">Bab 2: Kota Baghdad</span></li>
+                <li data-mod="3"><span class="mod-check">✓</span><span class="mod-name">Bab 3: Era Keemasan Ilmu</span></li>
+                <li data-mod="4"><span class="mod-check">✓</span><span class="mod-name">Bab 4: Kemerosotan Politik</span></li>
+                <li data-mod="5"><span class="mod-check">✓</span><span class="mod-name">Bab 5: Kejatuhan Empayar</span></li>
+            </ul>
+
+            <p class="sidebar-hint">Tandakan modul sebagai "selesai" dengan menjawab kuiz ringkas di penghujung nota. Nota lain kekal sebagai draf — sambung bila-bila masa.</p>
+        </aside>
+
+        <!-- KAWASAN KANDUNGAN NOTA -->
+        <main class="content-area">
+
+            <div class="smart-tools">
+                <button class="tool-btn" id="btn-read">🔊 Baca Teks</button>
+                <select id="voice-select" class="tool-btn voice-select" title="Pilih Gaya Suara Pembaca Berita Melayu">
+                    <option value="osman">🎙️ Berita TV3 (Ustaz Osman)</option>
+                    <option value="yasmin">🎙️ Berita TV3 (Yasmin)</option>
+                </select>
+                <button class="tool-btn ai-btn" id="btn-ai-summary">Rumusan AI</button>
+                <button class="tool-btn" id="btn-flashcards">Kad Imbas</button>
+                <button class="tool-btn" id="btn-focus">Mod Fokus</button>
+                <button class="tool-btn" id="btn-upload-my-notes" style="border-color:var(--ai-teal); color:var(--ai-teal);" title="Muat naik fail PDF/Word/Teks untuk dianalisis oleh AI">📤 Muat Naik Nota</button>
+                <input type="file" id="note-file-input" hidden accept=".pdf,.docx,.doc,.txt,.md">
+            </div>
+
+            <div class="util-row">
+                <div class="font-ctrl" title="Saiz teks">
+                    <button id="font-dec">A−</button>
+                    <button id="font-inc">A+</button>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="note-search" placeholder="Cari dalam nota…">
+                </div>
+                <span class="search-count" id="search-count"></span>
+            </div>
+
+            <div class="ai-summary-box" id="ai-summary-box">
+                <h4>Rumusan Pintar EDUSYS AI</h4>
+                <ul id="ai-bullets"></ul>
+            </div>
+
+            <h1 class="article-title" id="note-title">Sejarah Kebangkitan Bani Abbasiyah</h1>
+            <div class="article-meta">
+                <span>Dimuat naik oleh: Ustaz Ahmad</span>
+                <span class="dot">•</span>
+                <span>Masa membaca: 3 Minit</span>
+                <span class="dot">•</span>
+                <span id="highlight-count">0 penanda</span>
+            </div>
+
+            <div class="article-body" id="note-content">
+                <p>Kerajaan Bani Abbasiyah diasaskan pada tahun 750 Masihi selepas berjaya menumbangkan kerajaan Bani Umayyah. Gerakan revolusi ini bermula secara rahsia di wilayah Khurasan, dipimpin oleh seorang tokoh strategik bernama Abu Muslim al-Khurasani.</p>
+                <p>Kelemahan pentadbiran Umayyah pada fasa akhir, termasuk isu diskriminasi terhadap golongan Mawali (orang Islam bukan Arab) dan cukai yang tidak adil, telah menyemarakkan api kemarahan rakyat. Golongan Abbasiyah mengambil kesempatan ini dengan melaungkan slogan mengembalikan hak kekhalifahan kepada keluarga Nabi Muhammad SAW melalui keturunan bapa saudara baginda, Al-Abbas.</p>
+                <p>Selepas mencapai kemenangan mutlak dalam Pertempuran Zab, Abu al-Abbas As-Saffah telah diisytiharkan sebagai Khalifah pertama, menandakan bermulanya sebuah era baharu yang kelak akan memimpin dunia dalam bidang sains dan falsafah.</p>
+            </div>
+
+            <!-- Nota Peribadi Pelajar -->
+            <div class="personal-notes">
+                <h4>Nota Peribadi</h4>
+                <textarea id="personal-note-input" placeholder="Tulis rumusan sendiri, soalan yang timbul, atau apa jua yang anda nak ingat…"></textarea>
+                <div class="save-status" id="note-save-status"></div>
+            </div>
+
+            <!-- Kuiz Ringkas -->
+            <div class="quiz-section">
+                <h4>Uji Kefahaman Anda</h4>
+                <p class="sub">Jawab 3 soalan ini untuk menandakan Bab 1 sebagai selesai.</p>
+                <div id="quiz-root"></div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Kad Imbas Overlay -->
+    <div class="flash-overlay" id="flash-overlay">
+        <div class="flash-modal">
+            <div class="flash-modal-head">
+                <span>Kad Imbas — Bab 1</span>
+                <button class="close-flash" id="close-flash">✕</button>
+            </div>
+            <div class="flashcard" id="flashcard">
+                <div class="face front" id="flash-front">Tekan "Rumusan AI" dahulu untuk sediakan kad imbas.</div>
+                <div class="face back" id="flash-back"></div>
+                <span class="tap-hint">Tekan kad untuk balik</span>
+            </div>
+            <div class="flash-nav">
+                <button id="flash-prev">‹ Sebelum</button>
+                <span class="counter" id="flash-counter">0 / 0</span>
+                <button id="flash-next">Seterus ›</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Highlight popover -->
+    <div class="hl-popover" id="hl-popover">
+        <button id="hl-make">Sorot Teks</button>
+    </div>
+
+    <!-- Pomodoro Timer -->
+    <div class="study-timer" id="study-timer">
+        <button class="toggle-collapse" id="timer-collapse-btn">MASA</button>
+        <div class="digits" id="timer-digits">25:00</div>
+        <div class="timer-actions" style="display:flex; gap:6px; align-items:center;">
+            <button class="timer-btn" id="timer-start" title="Mula">▶</button>
+            <button class="timer-btn" id="timer-reset" title="Set semula">↺</button>
+        </div>
+    </div>
+
+    <script src="Assets/js/sound-effects.js"></script>
+    <script src="Assets/js/belajar.js?v=4"></script>
+</body>
+</html>

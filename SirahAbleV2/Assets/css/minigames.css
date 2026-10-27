@@ -1,0 +1,499 @@
+/* ==========================================================================
+   SIRAHABLE — MINI-GAMES INTERACTIVE SUITE STYLESHEET
+   Glassmorphism & Islamic Gold Heritage Aesthetics
+   ========================================================================== */
+
+.minigames-theme {
+    background-color: var(--clr-bg-deep);
+    color: var(--clr-text-main);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.mg-wrapper {
+    max-width: 1040px;
+    margin: 100px auto 60px;
+    padding: 0 24px;
+    position: relative;
+    z-index: 10;
+}
+
+/* ==========================================================================
+   1. TAB CONTROLS (PILL NAVIGATION)
+   ========================================================================== */
+.mg-tab-controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tab-btn {
+    background: rgba(15, 24, 44, 0.7);
+    border: 1px solid var(--border-gold);
+    color: var(--clr-text-dim);
+    padding: 12px 22px;
+    border-radius: var(--radius-full);
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    backdrop-filter: blur(8px);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.5px;
+}
+
+.tab-btn:hover {
+    border-color: var(--clr-gold-light);
+    color: var(--clr-gold-light);
+    background: rgba(212, 175, 55, 0.12);
+    box-shadow: var(--glow-gold);
+    transform: translateY(-2px);
+}
+
+.tab-btn.active {
+    background: var(--gold-gradient);
+    color: #02050C;
+    font-weight: 800;
+    border-color: #FFF;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.45);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   2. TAB CONTENT PANELS & HEADERS
+   ========================================================================== */
+.mg-tab-content {
+    background: var(--clr-bg-card);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid var(--border-gold);
+    border-radius: var(--radius-md);
+    padding: 40px 35px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    position: relative;
+    animation: fadeInTab 0.35s cubic-bezier(0.18, 0.89, 0.32, 1.2);
+}
+
+@keyframes fadeInTab {
+    0% { opacity: 0; transform: translateY(12px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.hidden-tab { display: none !important; }
+.active-tab { display: block; }
+
+.mg-header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-ui);
+    padding-bottom: 25px;
+}
+
+.mg-header .gold-badge {
+    margin-bottom: 12px;
+}
+
+.mg-header h2 {
+    font-family: var(--font-head);
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 900;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+
+.mg-header p {
+    color: var(--clr-text-dim);
+    font-size: 0.98rem;
+    max-width: 680px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   3. MINI GAME 1: HISTORICAL TIMELINE ORDERING
+   ========================================================================== */
+.timeline-drag-zone {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 25px 0 35px;
+}
+
+.timeline-slot {
+    background: rgba(11, 19, 36, 0.85);
+    border: 1.5px solid var(--border-gold);
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    transition: var(--transition);
+    user-select: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.timeline-slot:hover {
+    border-color: var(--clr-gold-light);
+    background: rgba(15, 26, 48, 0.95);
+    transform: translateX(4px);
+    box-shadow: var(--glow-gold);
+}
+
+.timeline-slot.dragging {
+    opacity: 0.45;
+    border-style: dashed;
+    border-color: var(--clr-gold-light);
+    transform: scale(0.98);
+}
+
+.timeline-slot.drag-over {
+    border-color: var(--clr-emerald);
+    background: rgba(16, 185, 129, 0.15);
+    box-shadow: var(--glow-emerald);
+}
+
+.slot-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-grow: 1;
+}
+
+.slot-drag-handle {
+    color: var(--clr-text-muted);
+    font-size: 1.2rem;
+    cursor: grab;
+    line-height: 1;
+}
+
+.slot-badge {
+    width: 32px;
+    height: 32px;
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid var(--border-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--clr-gold-light);
+    font-weight: 800;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.slot-title {
+    font-weight: 700;
+    color: #FFFFFF;
+    font-size: 1rem;
+    letter-spacing: 0.3px;
+}
+
+.slot-controls {
+    display: flex;
+    gap: 6px;
+}
+
+.btn-move-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-ui);
+    color: var(--clr-gold);
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: var(--transition);
+}
+
+.btn-move-item:hover:not(:disabled) {
+    background: var(--clr-gold);
+    color: #02050C;
+    border-color: var(--clr-gold);
+}
+
+.btn-move-item:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+}
+
+/* ==========================================================================
+   4. MINI GAME 2: SCHOLAR & DISCIPLINE MATCHING
+   ========================================================================== */
+.match-game-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.match-col {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.match-btn {
+    background: rgba(11, 19, 36, 0.85);
+    border: 1.5px solid var(--border-gold);
+    color: var(--clr-text-main);
+    padding: 16px 20px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    text-align: left;
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    font-weight: 600;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.match-btn:hover:not(:disabled) {
+    border-color: var(--clr-gold-light);
+    background: rgba(212, 175, 55, 0.12);
+    transform: translateX(4px);
+    box-shadow: var(--glow-gold);
+}
+
+.match-btn.selected {
+    border-color: var(--clr-gold-light);
+    background: rgba(212, 175, 55, 0.22);
+    box-shadow: 0 0 20px rgba(253, 224, 71, 0.4);
+    color: var(--clr-gold-light);
+    font-weight: 700;
+}
+
+.match-btn.correct {
+    background: rgba(16, 185, 129, 0.2) !important;
+    border-color: var(--clr-emerald) !important;
+    color: #FFFFFF !important;
+    box-shadow: var(--glow-emerald) !important;
+}
+
+.match-btn.wrong {
+    background: rgba(239, 68, 68, 0.2) !important;
+    border-color: var(--clr-fire) !important;
+    color: #FFFFFF !important;
+    animation: shakeAnim 0.35s ease;
+}
+
+@keyframes shakeAnim {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+}
+
+.match-btn:disabled {
+    opacity: 0.65;
+    cursor: default;
+}
+
+/* ==========================================================================
+   5. MINI GAME 3: EXPLORE & DISCOVER ARTIFACTS
+   ========================================================================== */
+.discovery-room-canvas {
+    position: relative;
+    height: 320px;
+    background: 
+        radial-gradient(circle at 50% 40%, rgba(212, 175, 55, 0.12) 0%, transparent 65%),
+        radial-gradient(circle, #101c33 0%, #040914 85%);
+    border: 1px solid var(--border-gold);
+    border-radius: var(--radius-md);
+    margin: 25px 0;
+    overflow: hidden;
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8);
+}
+
+.artifact-spot {
+    position: absolute;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition);
+    z-index: 10;
+}
+
+.artifact-spot:hover {
+    transform: scale(1.18);
+}
+
+.artifact-spot .artifact-node {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.16);
+    border: 1.5px solid var(--border-gold-strong);
+    color: var(--clr-gold-light);
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 18px rgba(212, 175, 55, 0.45);
+    animation: floatArtifact 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes floatArtifact {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-8px); }
+}
+
+.artifact-spot .artifact-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--clr-gold-light);
+    background: rgba(2, 5, 12, 0.85);
+    border: 1px solid var(--border-gold);
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    backdrop-filter: blur(6px);
+    white-space: nowrap;
+}
+
+.artifact-info-box {
+    background: rgba(7, 13, 26, 0.95);
+    border: 1px solid var(--border-gold);
+    border-left: 4px solid var(--clr-gold);
+    padding: 20px 24px;
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #E2E8F0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+/* ==========================================================================
+   6. MINI GAME 4: QUICK HISTORICAL QUIZ
+   ========================================================================== */
+.quick-quiz-box {
+    padding: 30px;
+    border-radius: var(--radius-md);
+    background: rgba(11, 19, 36, 0.8);
+    border: 1px solid var(--border-gold);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.quick-quiz-box h3 {
+    font-family: var(--font-head);
+    font-size: 1.35rem;
+    color: #FFFFFF;
+    margin-bottom: 24px;
+    line-height: 1.5;
+}
+
+.qq-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.qq-options .choice-btn {
+    background: rgba(15, 24, 44, 0.8);
+    border: 1.5px solid var(--border-gold);
+    padding: 15px 20px;
+    border-radius: var(--radius-sm);
+    text-align: left;
+    color: var(--clr-text-main);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.qq-options .choice-btn:hover:not(:disabled) {
+    border-color: var(--clr-gold-light);
+    background: rgba(212, 175, 55, 0.12);
+    transform: translateX(6px);
+    box-shadow: var(--glow-gold);
+}
+
+.qq-options .choice-btn.correct {
+    background-color: rgba(16, 185, 129, 0.2) !important;
+    border-color: var(--clr-emerald) !important;
+    color: #FFFFFF !important;
+    box-shadow: var(--glow-emerald) !important;
+}
+
+.qq-options .choice-btn.wrong {
+    background-color: rgba(239, 68, 68, 0.2) !important;
+    border-color: var(--clr-fire) !important;
+    color: #FFFFFF !important;
+}
+
+.qq-options .choice-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+/* ==========================================================================
+   FEEDBACK BANNERS & FOOTER ACTIONS
+   ========================================================================== */
+.mg-footer-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.feedback-msg {
+    width: 100%;
+    margin-top: 15px;
+    padding: 14px 20px;
+    border-radius: var(--radius-sm);
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: none;
+    animation: fadeInTab 0.3s ease;
+}
+
+.feedback-success {
+    color: #10B981;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid var(--clr-emerald);
+    display: block !important;
+    box-shadow: var(--glow-emerald);
+}
+
+.feedback-error {
+    color: #EF4444;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid var(--clr-fire);
+    display: block !important;
+    box-shadow: var(--glow-fire);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .match-game-grid { grid-template-columns: 1fr; }
+    .mg-tab-content { padding: 25px 18px; }
+    .timeline-slot { flex-direction: column; align-items: flex-start; }
+    .slot-controls { align-self: flex-end; }
+    .mg-footer-bar { flex-direction: column; }
+    .mg-footer-bar button { width: 100%; }
+}

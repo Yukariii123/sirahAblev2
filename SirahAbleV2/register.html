@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SirahAble — Pendaftaran Akaun Pelajar Baharu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Assets/css/homepage.css">
+    <link rel="stylesheet" href="Assets/css/register.css">
+</head>
+<body class="register-theme">
+
+    <div class="islamic-grid-pattern"></div>
+
+    <header class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="brand-logo">
+                <span class="rub-el-hizb">۞</span>
+                <div class="brand-text">
+                    <span class="title">SIRAHABLE</span>
+                    <span class="subtitle">PENDAFTARAN PELAJAR</span>
+                </div>
+            </a>
+            <div class="nav-actions">
+                <a href="index.html" class="btn-ghost">Sudah Ada Akaun? Log Masuk</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="register-wrapper">
+        
+        <section id="register-card" class="register-container">
+            <div class="register-form-card glass-panel">
+                
+                <div class="form-header">
+                    <span class="rub-el-hizb gold">۞</span>
+                    <h2>Cipta Akaun Penuntut Ilmu</h2>
+                    <p>Sertai pengembaraan SirahAble untuk merekod kemajuan & pencapaian anda.</p>
+                </div>
+
+                <form id="form-register" novalidate>
+                    <div class="form-group">
+                        <label for="reg-fullname">Nama Penuh Pelajar</label>
+                        <input type="text" id="reg-fullname" placeholder="Cth: Ahmad Ziyad bin Badrul" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-email">ID Pelajar / Emel</label>
+                        <input type="email" id="reg-email" placeholder="Cth: ziyad@edu.my" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password">Kata Laluan (Minimum 8 aksara)</label>
+                        <input type="password" id="reg-password" placeholder="••••••••" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password-confirm">Sahkan Kata Laluan</label>
+                        <input type="password" id="reg-password-confirm" placeholder="••••••••" required>
+                    </div>
+
+                    <div id="form-feedback" class="form-feedback-msg"></div>
+
+                    <button type="submit" class="btn-primary-hero btn-full">DAFTAR AKAUN SAYA</button>
+                </form>
+
+            </div>
+        </section>
+    </main>
+
+    <script src="Assets/js/register.js"></script>
+</body>
+</html>

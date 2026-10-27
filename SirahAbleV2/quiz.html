@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SirahAble — Arena Penilaian (Liquid Glass Edition)</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="Assets/css/homepage.css">
+    <link rel="stylesheet" href="Assets/css/quiz.css">
+</head>
+<body class="academic-quiz-theme">
+
+    <!-- Animasi Cecair Bergerak (Liquid Glass Background) -->
+    <div class="liquid-glass-bg">
+        <div class="liquid-blob blob-1"></div>
+        <div class="liquid-blob blob-2"></div>
+        <div class="liquid-blob blob-3"></div>
+        <div class="liquid-noise"></div>
+    </div>
+    
+    <!-- Canvas untuk Letupan Konfeti -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Header / HUD Status (Frosted Glass Cerah) -->
+    <header class="quiz-nav academic-glass">
+        <div class="nav-container">
+            <a href="index.html" class="brand-logo">
+                <span class="rub-el-hizb">۞</span>
+                <div class="brand-text">
+                    <span class="title">SIRAHABLE</span>
+                    <span class="subtitle">SISTEM PENILAIAN SMU</span>
+                </div>
+            </a>
+
+            <div class="quiz-stats-header">
+                <!-- Streak -->
+                <div class="hud-pill streak-pill academic-glass" id="streak-counter" title="Rekod Jawapan Tepat Berturut">
+                    <span class="streak-label" style="font-size:0.75rem; color:var(--color-gold); font-weight:700;">STREAK:</span> <span id="streak-val">0</span>
+                </div>
+                <!-- XP -->
+                <div class="hud-pill xp-pill academic-glass" id="hud-xp-box">
+                    <span id="quiz-user-xp">100 XP</span>
+                </div>
+                <!-- Butang Audio & Navigasi -->
+                <button id="btn-sound-toggle" class="btn-sound academic-glass" title="Audio">AUDIO</button>
+                <a href="belajar.html" class="btn-ghost-sm academic-glass">📖 NOTA</a>
+                <a href="game.html" class="btn-ghost-sm academic-glass" style="color:var(--color-gold); border-color:var(--color-gold);">🎮 2D GAME</a>
+                <a href="dashboard.html" class="btn-ghost-sm academic-glass">← DASHBOARD</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="quiz-wrapper">
+        
+        <!-- ================== SKRIN 1: PEMILIHAN MODUL ================== -->
+        <section id="quiz-selection-screen" class="quiz-container active-view">
+            <div class="quiz-header-box">
+                <span class="badge-pulsing academic-glass">PUSAT PENILAIAN KENDIRI</span>
+                <h1 class="quiz-main-title">Arena Pertarungan Minda</h1>
+                <p class="quiz-main-desc">Uji kefahaman sejarah anda. Jawab dengan pantas, kumpul Mata Ilmu (XP), dan capai gred Mumtaz!</p>
+            </div>
+
+            <div class="module-selection-grid" id="module-selection-container">
+                <!-- Kad Modul Dijana Dinamik oleh JS -->
+            </div>
+        </section>
+
+        <!-- ================== SKRIN 2: GAMEPLAY KUIZ ================== -->
+        <section id="quiz-play-screen" class="quiz-container hidden-view">
+            <div class="quiz-play-card academic-glass-panel">
+                
+                <!-- Status Bar & Talian Hayat -->
+                <div class="quiz-gameplay-header">
+                    <div class="left-stat">
+                        <span class="q-badge academic-glass" id="current-q-index">SOALAN 1 / 5</span>
+                        <!-- Multiplier Tag -->
+                        <span class="combo-multiplier hidden" id="combo-multiplier">2X BONUS!</span>
+                    </div>
+
+                    <!-- Talian Hayat Powerups -->
+                    <div class="lifeline-container">
+                        <button class="btn-lifeline academic-glass" id="btn-lifeline-5050" title="Gugurkan 2 Pilihan (50:50)">
+                            <span>50:50</span>
+                        </button>
+                        <button class="btn-lifeline academic-glass" id="btn-lifeline-time" title="Tambah +10 Saat Masa">
+                            <span>+10s</span>
+                        </button>
+                    </div>
+
+                    <!-- Pemasa Visual -->
+                    <div class="timer-badge academic-glass" id="quiz-timer">
+                        <span style="font-size:0.75rem; color:var(--color-gold); font-weight:700;">MASA:</span> <span id="timer-sec">20</span>s
+                    </div>
+                </div>
+
+                <!-- Bar Kemajuan Soalan (Liquid Bar) -->
+                <div class="quiz-progress-bar">
+                    <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+                </div>
+
+                <!-- Pernyataan Soalan -->
+                <div class="question-container">
+                    <span class="q-category-tag" id="q-category-tag">KOTA BAGHDAD</span>
+                    <h2 class="question-text" id="question-text">Memuatkan cabaran soalan...</h2>
+                </div>
+
+                <!-- Grid Pilihan Jawapan (Liquid Animation) -->
+                <div class="options-grid" id="options-grid"></div>
+
+                <!-- Kotak Maklum Balas Akademik (Rationale) -->
+                <div class="academic-rationale academic-glass hidden" id="academic-rationale">
+                    <div class="rationale-header">
+                        <span class="status-bounce" id="rationale-status-icon">✓</span>
+                        <h4 id="rationale-title">Fakta Sejarah</h4>
+                    </div>
+                    <p id="rationale-text"></p>
+                    <button class="btn-next-question" id="btn-next-question">
+                        <span id="btn-next-text">SOALAN SETERUSNYA</span> <span class="arrow-anim">→</span>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================== SKRIN 3: KEPUTUSAN (RESULTS) ================== -->
+        <section id="quiz-result-screen" class="quiz-container hidden-view">
+            <div class="result-card academic-glass-panel">
+                <div class="result-badge-anim" id="result-badge-icon" style="font-family:'Cinzel',serif; font-size:2rem; font-weight:900; color:var(--color-gold); letter-spacing:3px;">KEPUTUSAN</div>
+                <h2 class="result-title" id="result-title">Sesi Penilaian Tamat!</h2>
+                <p class="result-subtitle" id="result-subtitle">Analisis prestasi anda telah direkodkan ke dalam Sistem Edusys.</p>
+
+                <div class="score-circle-container">
+                    <div class="score-circle academic-glass">
+                        <span class="score-val" id="final-score-percent">100%</span>
+                        <span class="score-label">SKOR KESELURUHAN</span>
+                    </div>
+                </div>
+
+                <!-- Statistik (XP, Kombo, Gred) -->
+                <div class="result-metrics academic-glass">
+                    <div class="metric-box">
+                        <span class="metric-num text-gold" id="final-xp-gained">+60 XP</span>
+                        <span class="metric-label">Mata Ilmu (XP)</span>
+                    </div>
+                    <div class="metric-divider"></div>
+                    <div class="metric-box">
+                        <span class="metric-num text-emerald" id="final-streak-max">5 Max</span>
+                        <span class="metric-label">Fokus Berturut</span>
+                    </div>
+                    <div class="metric-divider"></div>
+                    <div class="metric-box">
+                        <span class="metric-num text-gold-bright" id="final-grade">MUMTAZ</span>
+                        <span class="metric-label">Taraf Pencapaian</span>
+                    </div>
+                </div>
+
+                <div class="result-actions">
+                    <button class="btn-primary-edu academic-glass" id="btn-retry-quiz">Ulang Kaji Modul Ini</button>
+                    <button class="btn-secondary-edu academic-glass" id="btn-back-modules">Senarai Bab Lain</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="Assets/js/sound-effects.js"></script>
+    <script src="Assets/js/quiz.js"></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SirahAble — Pusat Mini-Games Pembelajaran</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Assets/css/homepage.css">
+    <link rel="stylesheet" href="Assets/css/minigames.css">
+</head>
+<body class="minigames-theme">
+
+    <div class="islamic-grid-pattern"></div>
+
+    <header class="main-nav" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="brand-logo">
+                <span class="rub-el-hizb">۞</span>
+                <div class="brand-text">
+                    <span class="title">SIRAHABLE</span>
+                    <span class="subtitle">MINI-GAMES SEJARAH</span>
+                </div>
+            </a>
+            <div class="nav-actions">
+                <a href="dashboard.html" class="btn-ghost">📊 Dashboard</a>
+                <a href="belajar.html" class="btn-ghost">📖 Nota</a>
+                <a href="peta.html" class="btn-ghost">🗺️ Peta</a>
+                <a href="galeri.html" class="btn-ghost">🏛️ Galeri</a>
+                <a href="quiz.html" class="btn-ghost">⚔️ Kuiz</a>
+                <a href="game.html" class="btn-gold-sm">🎮 Pengembaraan 2D</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="mg-wrapper">
+        
+        <!-- Tab Pemilihan 4 Mini-Game -->
+        <div class="mg-tab-controls">
+            <button class="tab-btn active" data-tab="tab-timeline">1. Susun Garis Masa</button>
+            <button class="tab-btn" data-tab="tab-match">2. Padankan Tokoh & Ilmu</button>
+            <button class="tab-btn" data-tab="tab-discover">3. Teroka Artifak</button>
+            <button class="tab-btn" data-tab="tab-quiz">4. Kuiz Kilat Harian</button>
+        </div>
+
+        <!-- MINI GAME 1: Historical Timeline (Susun Peristiwa) -->
+        <section id="tab-timeline" class="mg-tab-content active-tab glass-panel">
+            <div class="mg-header">
+                <span class="gold-badge">MINI GAME 01</span>
+                <h2>Susunan Kronologi Tamadun (750 M – 1258 M)</h2>
+                <p>Susun kad peristiwa mengikut urutan masa yang tepat, dari era kebangkitan awal sehingga kejatuhan Baghdad. Gunakan seret & lepas atau butang ▲ / ▼.</p>
+            </div>
+
+            <div class="timeline-drag-zone" id="timeline-list">
+                <!-- Dijana Dinamik oleh minigames.js -->
+            </div>
+
+            <div class="mg-footer-bar">
+                <button class="btn-primary-hero" id="btn-check-timeline">Semak Susunan Garis Masa</button>
+                <button class="btn-secondary-hero" id="btn-reset-timeline">Set Semula Rawak</button>
+                <div id="timeline-feedback" class="feedback-msg"></div>
+            </div>
+        </section>
+
+        <!-- MINI GAME 2: Match the Achievement (Padankan Tokoh & Disiplin) -->
+        <section id="tab-match" class="mg-tab-content hidden-tab glass-panel">
+            <div class="mg-header">
+                <span class="gold-badge">MINI GAME 02</span>
+                <h2>Padanan Tokoh & Sumbangan Agung</h2>
+                <p>Pilih satu disiplin ilmu di sebelah kiri, kemudian klik padanan tokoh sarjana di sebelah kanan untuk menyatukan khazanah ilmu.</p>
+            </div>
+
+            <div class="match-game-grid">
+                <div class="match-col" id="match-disciplines-col">
+                    <button class="match-btn" data-key="math">Matematik: Pengasas Algebra & Angka Sifar</button>
+                    <button class="match-btn" data-key="med">Perubatan: Kitab Al-Hawi & Rawatan Cacar</button>
+                    <button class="match-btn" data-key="astro">Astronomi: Cerapan Orbit & Kalendar Falak</button>
+                    <button class="match-btn" data-key="trans">Penterjemahan: Ketua Naskhah Bayt al-Hikmah</button>
+                    <button class="match-btn" data-key="geo">Geografi: Pemetaan Dunia & Cerapan Garis Lintang</button>
+                </div>
+                <div class="match-col" id="match-scholars-col">
+                    <button class="match-btn" data-target="trans">Hunayn ibn Ishaq</button>
+                    <button class="match-btn" data-target="math">Muhammad bin Musa Al-Khwarizmi</button>
+                    <button class="match-btn" data-target="geo">Al-Idrisi & Al-Khwarizmi (Geografi)</button>
+                    <button class="match-btn" data-target="astro">Al-Battani & Sind ibn Ali</button>
+                    <button class="match-btn" data-target="med">Abu Bakar Al-Razi (Rhazes)</button>
+                </div>
+            </div>
+
+            <div class="mg-footer-bar">
+                <button class="btn-secondary-hero" id="btn-reset-match">Set Semula Padanan</button>
+                <div id="match-feedback" class="feedback-msg"></div>
+            </div>
+        </section>
+
+        <!-- MINI GAME 3: Explore and Discover (Cari Objek & Buka Fakta) -->
+        <section id="tab-discover" class="mg-tab-content hidden-tab glass-panel">
+            <div class="mg-header">
+                <span class="gold-badge">MINI GAME 03</span>
+                <h2>Pencarian Khazanah Manuskrip Baghdad</h2>
+                <p>Klik pada objek yang tersembunyi dalam arkib bilik kajian untuk meneliti fakta sejarah dan menjawab soalan pengukuhan.</p>
+            </div>
+
+            <div class="discovery-room-canvas">
+                <!-- Titik Kajian Arkib -->
+                <div class="artifact-spot" style="top: 20%; left: 15%;" data-title="Kitab Al-Jabr" data-info="Kitab Al-Jabr wa'l-Muqabala: Dikarang oleh Al-Khwarizmi, menjadi asas kepada formula algebra moden bagi pengiraan perdagangan dan pembahagian harta faraid.">
+                    <div class="artifact-node">I</div> <span class="artifact-label">Kitab Al-Jabr</span>
+                </div>
+                <div class="artifact-spot" style="top: 55%; left: 75%;" data-title="Astrolab Tembaga" data-info="Astrolab Tembaga: Instrumen falak tepat ciptaan ilmuwan Islam untuk menentukan kedudukan buruj bintang, waktu solat, dan koordinat kiblat.">
+                    <div class="artifact-node">II</div> <span class="artifact-label">Astrolab</span>
+                </div>
+                <div class="artifact-spot" style="top: 35%; left: 45%;" data-title="Pelita Minyak Samarra" data-info="Pelita Minyak: Simbol dedikasi malam para penterjemah Bayt al-Hikmah menyalin naskhah Yunani, Parsi, dan Sanskrit ke Bahasa Arab.">
+                    <div class="artifact-node">III</div> <span class="artifact-label">Pelita Minyak</span>
+                </div>
+                <div class="artifact-spot" style="top: 65%; left: 25%;" data-title="Manuskrip Perubatan Al-Hawi" data-info="Kitab Al-Hawi: Ensiklopedia perubatan komprehensif Abu Bakar Al-Razi yang merintis penggunaan benang jahitan luka dan pemerhatian klinikal pesakit.">
+                    <div class="artifact-node">IV</div> <span class="artifact-label">Naskhah Al-Hawi</span>
+                </div>
+                <div class="artifact-spot" style="top: 22%; left: 80%;" data-title="Mohor Khalifah Baghdad" data-info="Cop Mohor Abbasiyah: Lambang perpaduan dan kedaulatan khalifah yang memerintah sebuah empayar merentas tiga benua.">
+                    <div class="artifact-node">V</div> <span class="artifact-label">Mohor Khalifah</span>
+                </div>
+            </div>
+
+            <div class="mg-footer-bar">
+                <div class="artifact-info-box" id="artifact-info-text">
+                    Klik mana-mana simbol artifak di bilik kajian di atas untuk meneliti hujah sejarah.
+                </div>
+            </div>
+        </section>
+
+        <!-- MINI GAME 4: Quick Historical Quiz -->
+        <section id="tab-quiz" class="mg-tab-content hidden-tab glass-panel">
+            <div class="mg-header">
+                <span class="gold-badge">MINI GAME 04</span>
+                <h2>Kuiz Kilat Pengukuhan Minda (Bank Soalan Silibus)</h2>
+                <p>Jawab soalan pantas silibus Khilafah Abbasiyah untuk mengumpul mata XP bonus harian.</p>
+            </div>
+            <div class="quick-quiz-box" id="quick-quiz-body">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <span id="qq-counter" style="color:var(--color-gold); font-weight:700; font-size:0.85rem;">SOALAN 1 / 10</span>
+                    <span id="qq-score-box" style="color:#4ECCA3; font-weight:700; font-size:0.85rem;">SKOR: 0 XP</span>
+                </div>
+                <h3 id="qq-question">Memuatkan soalan silibus...</h3>
+                <div class="qq-options" id="qq-options"></div>
+                <div id="qq-feedback" class="feedback-msg"></div>
+                <button class="btn-primary-hero" id="btn-qq-next" style="margin-top: 15px;">Soalan Seterusnya →</button>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="Assets/js/sound-effects.js"></script>
+    <script src="Assets/js/minigames.js"></script>
+</body>
+</html>

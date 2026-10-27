@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SirahAble — Hab Pembelajaran Sarjana</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Gunakan CSS Utama dan CSS Dashboard -->
+<link rel="stylesheet" href="Assets/css/homepage.css?v=2">
+<link rel="stylesheet" href="Assets/css/dashboard.css?v=2">
+</head>
+<body class="dashboard-theme">
+
+    <!-- Latar Belakang Geometri & Cahaya -->
+    <div class="dash-bg-glow"></div>
+    <div class="islamic-grid-pattern"></div>
+
+    <!-- Header Navigasi -->
+    <header class="dash-nav glass-morphism">
+        <div class="nav-container">
+            <a href="dashboard.html" class="brand-logo">
+                <span class="rub-el-hizb">۞</span>
+                <div class="brand-text">
+                    <span class="title">SIRAHABLE</span>
+                    <span class="subtitle">PORTAL SARJANA</span>
+                </div>
+            </a>
+
+            <!-- MENU BAR BERKELAS & KEMAS -->
+            <nav class="nav-menu" id="nav-menu">
+                <a href="dashboard.html" class="nav-link active">DASHBOARD</a>
+                <a href="belajar.html" class="nav-link">NOTA PINTAR</a>
+
+                <!-- DROPDOWN 1: MOD PENJELAJAHAN 2D & PETA -->
+                <div class="nav-dropdown">
+                    <button class="dropdown-toggle" type="button" aria-haspopup="true">
+                        <span>TEROKA</span>
+                        <span class="dropdown-caret">▾</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="peta.html" class="dropdown-item">
+                            <span class="item-icon">🗺️</span>
+                            <div class="item-info">
+                                <span class="item-title">Peta Empayar Interaktif</span>
+                                <span class="item-desc">14 tapak kota & laluan ekspedisi</span>
+                            </div>
+                        </a>
+                        <a href="galeri.html" class="dropdown-item">
+                            <span class="item-icon">🏛️</span>
+                            <div class="item-info">
+                                <span class="item-title">Galeri Artifak Interaktif</span>
+                                <span class="item-desc">Koleksi khazanah & titik panas ilmiah</span>
+                            </div>
+                        </a>
+                        <a href="game.html" class="dropdown-item">
+                            <span class="item-icon">🎮</span>
+                            <div class="item-info">
+                                <span class="item-title">Pengembaraan 2D SirahAble</span>
+                                <span class="item-desc">Penerokaan platformer berpandu bab</span>
+                            </div>
+                        </a>
+                        <a href="minigames.html" class="dropdown-item">
+                            <span class="item-icon">🧩</span>
+                            <div class="item-info">
+                                <span class="item-title">Pusat Mini-Games</span>
+                                <span class="item-desc">Susun garis masa & padanan tokoh</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- DROPDOWN 2: PENILAIAN & LENCANA -->
+                <div class="nav-dropdown">
+                    <button class="dropdown-toggle" type="button" aria-haspopup="true">
+                        <span>PENILAIAN</span>
+                        <span class="dropdown-caret">▾</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="quiz.html" class="dropdown-item">
+                            <span class="item-icon">⚔️</span>
+                            <div class="item-info">
+                                <span class="item-title">Arena Kuiz SMU</span>
+                                <span class="item-desc">Ujian berfakta silibus KSSM</span>
+                            </div>
+                        </a>
+                        <a href="final_challenge.html" class="dropdown-item">
+                            <span class="item-icon">🏆</span>
+                            <div class="item-info">
+                                <span class="item-title">Cabaran Akhir Silibus</span>
+                                <span class="item-desc">Penilaian penentu gred Mumtaz</span>
+                            </div>
+                        </a>
+                        <a href="achievements.html" class="dropdown-item">
+                            <span class="item-icon">🎖️</span>
+                            <div class="item-info">
+                                <span class="item-title">Galeri Lencana Kehormatan</span>
+                                <span class="item-desc">Koleksi pencapaian & ganjaran XP</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="settings.html" class="btn-dash-ghost" title="Tetapan Akaun Pelajar">⚙️ TETAPAN</a>
+                <a href="api/logout.php" class="btn-dash-ghost logout" title="Keluar daripada Portal">LOG KELUAR</a>
+                <button class="mobile-menu-toggle" id="btn-mobile-toggle" aria-label="Buka Menu Navigasi">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-wrapper">
+        
+        <!-- BARIS ATAS: Profil Pelajar & Leaderboard -->
+        <div class="dash-top-grid">
+            
+            <!-- PANEL KIRI: Profil & Metrik Utama -->
+            <section class="profile-panel glass-morphism">
+                <div class="profile-header">
+                    <div class="avatar-ring">
+                        <div class="avatar-seal">
+                            <span class="seal-icon" style="font-family:'Cinzel', serif; font-weight:900; font-size:1.6rem; color:var(--dash-gold);">SA</span>
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <span class="gold-badge" id="student-rank">Menyemak Status...</span>
+                        <h1 id="student-name">Memuatkan Profil...</h1>
+                        <p class="meta-desc">Silibus: Khilafah Abbasiyah (KSSM / SMU Tingkatan 4)</p>
+                    </div>
+                </div>
+
+                <div class="stats-overview-grid">
+                    <div class="stat-box">
+                        <div>
+                            <p>Mata Ilmu (XP)</p>
+                            <h3 id="dash-xp">0 XP</h3>
+                        </div>
+                    </div>
+                    <div class="stat-box">
+                        <div>
+                            <p>Fokus Harian</p>
+                            <h3 id="dash-streak">0 Hari</h3>
+                        </div>
+                    </div>
+                    <div class="stat-box">
+                        <div>
+                            <p>Silibus Selesai</p>
+                            <h3 id="dash-percent">0%</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-header">
+                        <span class="prog-title">Kemajuan Keseluruhan</span>
+                        <span class="prog-text" id="progress-indicator-text">0 / 8 Bab Selesai</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill liquid-anim" id="overall-bar-fill" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PANEL KANAN: Leaderboard (Ranking) -->
+            <section class="leaderboard-panel glass-morphism">
+                <div class="panel-header">
+                    <h3>Dewan Kemasyhuran</h3>
+                    <p>Ranking Top 5 Pelajar (XP)</p>
+                </div>
+                <ul class="ranking-list" id="leaderboard-list">
+                    <!-- Dijana oleh JS -->
+                    <li class="rank-item skeleton-load">Memuatkan data...</li>
+                </ul>
+            </section>
+
+        </div>
+
+        <!-- BARIS TENGAH: Pusat Telaah Pintar AI (Rumusan Nota & Flashcards) -->
+        <section class="ai-study-hub glass-morphism">
+            <div class="ai-hub-header">
+                <div class="ai-title">
+                    <div>
+                        <span class="gold-badge" style="margin-bottom:8px; display:inline-block;">🤖 EDUSYS AI STUDY ENGINE</span>
+                        <h2>Pusat Telaah Pintar & Penjana Rumusan Nota</h2>
+                        <p>Muat naik fail nota kelas anda (PDF, Word, atau Teks), dan AI akan menganalisis fakta, membina rumusan terperinci, isi-isi penting, serta kad imbasan secara automatik.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-upload-area" id="dropzone">
+                <div class="upload-icon-anim" style="font-size:2.8rem; margin-bottom:10px;">📄</div>
+                <h4>Tarik & Lepas Fail Nota Di Sini</h4>
+                <p style="color:var(--dash-muted); font-size:0.85rem; margin-bottom:15px;">Menyokong dokumen PDF (.pdf), Microsoft Word (.docx), atau Teks (.txt, .md) • Maksimum 10MB</p>
+                <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+                    <button class="btn-upload" id="btn-browse-file">📁 Pilih Fail Nota</button>
+                    <button class="btn-upload" id="btn-toggle-paste" style="background:rgba(255,255,255,0.08); color:#FFF; border:1px solid rgba(212,175,55,0.3);">✍️ Atau Tampal Teks</button>
+                </div>
+                <input type="file" id="file-input" hidden accept=".pdf,.docx,.doc,.txt,.md">
+
+                <!-- Kotak tampal teks (jika tiada fail) -->
+                <div id="paste-box" class="hidden" style="margin:20px auto 0; width:100%; max-width:650px; text-align:left;">
+                    <textarea id="paste-input" placeholder="Tampal atau taip isi nota anda di sini..." style="width:100%; min-height:100px; background:rgba(0,0,0,0.4); border:1px solid rgba(212,175,55,0.3); border-radius:8px; padding:12px; color:#FFF; font-family:inherit; font-size:0.9rem; resize:vertical; box-sizing:border-box;"></textarea>
+                    <button class="btn-upload" id="btn-submit-paste" style="margin-top:10px; width:100%;">Jana Rumusan Daripada Teks Ini</button>
+                </div>
+            </div>
+
+            <!-- Loading Spinner & Status -->
+            <div class="ai-processing hidden" id="ai-processing">
+                <div class="spinner"></div>
+                <h4 style="color:var(--dash-gold); margin-bottom:6px;">EDUSYS AI Sedang Membaca Dokumen...</h4>
+                <p style="color:var(--dash-muted); font-size:0.88rem;">Mengekstrak kata kunci sejarah, menganalisis hujah akademik, dan membina rumusan pintar...</p>
+            </div>
+
+            <!-- Hasil Rumusan AI & Flashcards -->
+            <div class="ai-results hidden" id="ai-results">
+                <!-- Header Status Hasil -->
+                <div class="summary-result-head">
+                    <div>
+                        <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px; flex-wrap:wrap;">
+                            <span class="file-tag-badge" id="res-file-name">Nota_Sejarah.pdf</span>
+                            <span class="xp-gain-badge" id="res-xp-badge">+25 XP Diperoleh! ✦</span>
+                        </div>
+                        <h3 id="res-title" style="color:#FFF; font-size:1.4rem; font-family:'Cinzel',serif; margin:0;">Tajuk Nota Sejarah</h3>
+                    </div>
+                    <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                        <button class="btn-audio-summary" id="btn-audio-summary">🔊 Dengar Rumusan TV3</button>
+                        <button class="btn-reset-summary" id="btn-new-upload">↺ Muat Naik Lain</button>
+                    </div>
+                </div>
+
+                <!-- Kad Rumusan Eksekutif -->
+                <div class="summary-card-body">
+                    <h4 style="color:var(--dash-gold); margin:0 0 10px; display:flex; align-items:center; gap:8px;">
+                        <span>📋</span> Rumusan Keseluruhan (Executive Summary)
+                    </h4>
+                    <p id="res-summary-text" style="color:#E2E8F0; line-height:1.75; font-size:0.98rem; margin-bottom:20px;"></p>
+
+                    <h4 style="color:#4ECCA3; margin:0 0 10px; display:flex; align-items:center; gap:8px;">
+                        <span>⭐</span> Fakta & Isi-Isi Penting
+                    </h4>
+                    <ul id="res-key-points" class="key-points-list"></ul>
+
+                    <div style="margin-top:20px;">
+                        <span style="font-size:0.8rem; color:var(--dash-muted); text-transform:uppercase; letter-spacing:1px; display:block; margin-bottom:8px;">Kata Kunci Utama:</span>
+                        <div id="res-keywords" class="keyword-tags-wrap"></div>
+                    </div>
+                </div>
+
+                <!-- Kad Imbasan (Flashcards) Dinamik -->
+                <div style="margin-top:35px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; flex-wrap:wrap; gap:10px;">
+                        <h3 style="color:#FFF; font-size:1.2rem; margin:0;">Kad Imbasan Pintar (Dijana Dari Nota Anda)</h3>
+                        <span style="color:var(--dash-muted); font-size:0.8rem;">Klik kad untuk terbalikkan jawapan</span>
+                    </div>
+                    <div class="flashcard-grid" id="flashcard-container"></div>
+                </div>
+
+                <!-- Kuiz Pengukuhan Dinamik -->
+                <div id="ai-quiz-section" class="hidden" style="margin-top:35px; border-top:1px dashed rgba(255,255,255,0.1); padding-top:25px;">
+                    <h3 style="color:var(--dash-gold); font-size:1.2rem; margin-bottom:15px;">Kuiz Uji Minda Dari Nota Anda</h3>
+                    <div id="ai-quiz-container"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEKSYEN BAHARU: Peta Interaktif & Garis Masa Empayar Abbasiyah -->
+        <section class="glass-morphism" style="margin-bottom: 35px; padding: 28px; border-radius: 18px; border: 1px solid rgba(56, 189, 248, 0.3); background: radial-gradient(circle at 85% 20%, rgba(56, 189, 248, 0.12) 0%, rgba(13, 19, 36, 0.85) 100%); position: relative; overflow: hidden;">
+            <div style="position: absolute; right: -20px; top: -20px; font-size: 8rem; opacity: 0.05; font-family: 'Cinzel', serif; color: #38bdf8; pointer-events: none;">۞</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; position: relative; z-index: 2;">
+                <div style="max-width: 680px;">
+                    <div style="display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; border-radius: 20px; background: rgba(56, 189, 248, 0.15); border: 1px solid #38bdf8; color: #7dd3fc; font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">
+                        <span>🗺️</span> Modul Geografi & Garis Masa Imersif
+                    </div>
+                    <h2 style="font-family: 'Cinzel', serif; font-size: 1.6rem; color: #FFF; margin: 0 0 10px; background: linear-gradient(90deg, #FFF, #7dd3fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                        Peta Interaktif Empayar Abbasiyah & Garis Masa Dinamik
+                    </h2>
+                    <p style="color: #94a3b8; font-size: 0.94rem; line-height: 1.6; margin: 0 0 16px;">
+                        Terokai 14 kota bersejarah, fasa sempadan wilayah dinamik dari 750 M hingga 1258 M, animasi Laluan Sutera & Maritim, serta dengar naratif suara pembaca berita TV3 Melayu bagi setiap peristiwa agung.
+                    </p>
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+                        <span style="font-size: 0.82rem; color: #cbd5e1; display: flex; align-items: center; gap: 6px;">
+                            <strong style="color: var(--dash-gold);">14</strong> Tapak Sejarah
+                        </span>
+                        <span style="font-size: 0.82rem; color: #cbd5e1; display: flex; align-items: center; gap: 6px;">
+                            <strong style="color: #38bdf8;">5</strong> Fasa Dinamik
+                        </span>
+                        <span style="font-size: 0.82rem; color: #cbd5e1; display: flex; align-items: center; gap: 6px;">
+                            <strong style="color: #10b981;">+15 XP</strong> Setiap Kuiz Tapak
+                        </span>
+                    </div>
+                </div>
+                <div>
+                    <a href="peta.html" class="btn-dash-primary" style="padding: 14px 28px; font-size: 0.95rem; font-weight: 800; background: linear-gradient(135deg, #0284c7, #0369a1); border-color: #38bdf8; box-shadow: 0 0 25px rgba(56, 189, 248, 0.4); display: inline-flex; align-items: center; gap: 10px; text-decoration: none; border-radius: 12px;">
+                        <span>Buka Peta Interaktif Penuh</span>
+                        <span style="font-size: 1.2rem;">➔</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEKSYEN BAHARU: Galeri Artifak & Khazanah Muzium Maya Interaktif -->
+        <section class="glass-morphism" style="margin-bottom: 35px; padding: 28px; border-radius: 18px; border: 1px solid rgba(212, 175, 55, 0.4); background: radial-gradient(circle at 15% 20%, rgba(212, 175, 55, 0.15) 0%, rgba(13, 19, 36, 0.9) 100%); position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <div style="position: absolute; right: -25px; bottom: -30px; font-size: 9rem; opacity: 0.06; font-family: 'Cinzel', serif; color: var(--dash-gold); pointer-events: none;">🏛️</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; position: relative; z-index: 2;">
+                <div style="max-width: 680px;">
+                    <div style="display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; border-radius: 20px; background: rgba(212, 175, 55, 0.18); border: 1px solid var(--dash-gold); color: #fef08a; font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">
+                        <span>✨</span> Khazanah Tamadun Emas Abbasiyah
+                    </div>
+                    <h2 style="font-family: 'Cinzel', serif; font-size: 1.6rem; color: #FFF; margin: 0 0 10px; background: linear-gradient(90deg, #FFF, #fef08a, #d4af37); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                        🏛️ Muzium Maya: Galeri Interaktif Artifak & Sains
+                    </h2>
+                    <p style="color: #94a3b8; font-size: 0.94rem; line-height: 1.6; margin: 0 0 16px;">
+                        Pemeriksaan visual artifak berdefinisi tinggi 8K dari Astrolab Maryam Al-Asturlabi, Manuskrip Perubatan Bimaristan, Kamera Obscura Ibnu al-Haitham, Mohor Khalifah Harun al-Rasyid, hingga Jam Gajah Automata Al-Jazari lengkap dengan kanta pembesar dan titik panas interaktif.
+                    </p>
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+                        <span style="font-size: 0.82rem; color: #cbd5e1; display: flex; align-items: center; gap: 6px;">
+                            <strong style="color: var(--dash-gold);">10</strong> Koleksi Artifak Agung
+                        </span>
+                        <span style="font-size: 0.82rem; color: #cbd5e1; display: flex; align-items: center; gap: 6px;">
+                            <strong style="color: #fef08a;">30</strong> Titik Panas Hotspot
+                        </span>
+                        <span style="font-size: 0.82rem; color: #cbd5e1; display: flex; align-items: center; gap: 6px;">
+                            <strong style="color: #38bdf8;">KSSM Tingkatan 4 & 5</strong> Kaitan Peperiksaan SPM
+                        </span>
+                    </div>
+                </div>
+                <div>
+                    <a href="galeri.html" class="btn-dash-primary" style="padding: 14px 28px; font-size: 0.95rem; font-weight: 800; background: linear-gradient(135deg, #d4af37, #b45309); border-color: #fde047; color: #040812; box-shadow: 0 0 25px rgba(212, 175, 55, 0.4); display: inline-flex; align-items: center; gap: 10px; text-decoration: none; border-radius: 12px;">
+                        <span>Masuk Muzium Maya</span>
+                        <span style="font-size: 1.2rem;">➔</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- BARIS BAWAH: Laluan Modul -->
+        <section class="modules-section">
+            <div class="section-title-wrap">
+                <h2>Laluan Kronologi Abbasiyah</h2>
+                <p>Selesaikan modul mengikut turutan untuk membuka lencana khas.</p>
+            </div>
+            
+            <div class="dash-modules-grid" id="modules-flow-container">
+                <!-- Dijana Dinamik oleh JS -->
+            </div>
+        </section>
+
+        <!-- BARIS BAWAH: Pencapaian -->
+        <section class="badges-section glass-morphism">
+            <div class="section-title-wrap" style="margin-bottom: 20px;">
+                <h2>Lencana Pencapaian Pelajar</h2>
+            </div>
+            <div class="badges-grid-flex" id="badges-container">
+                <!-- Dijana Dinamik oleh JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <script src="Assets/js/sound-effects.js"></script>
+    <script src="Assets/js/dashboard.js?v=5"></script>
+</body>
+</html>

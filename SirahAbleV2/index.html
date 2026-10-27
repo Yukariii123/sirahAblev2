@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIRAHABLE — Unreal Engine 5 Cinematic Edition</title>
+    
+    <!-- Tipografi Epic Fantasy Game -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="Assets/css/homepage.css">
+</head>
+<body class="ue5-cinematic-theme">
+
+    <!-- Canvas Asal untuk serasi dengan JS lama jika ada -->
+    <canvas id="ambient-canvas"></canvas>
+    <div class="islamic-grid-pattern"></div>
+
+    <!-- ==================== 1. GAME HUD HEADER ==================== -->
+    <header class="game-hud-header" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="brand-crest">
+                <div class="crest-symbol">۞</div>
+                <div class="brand-title">
+                    <span class="main-name">SIRAHABLE</span>
+                    <span class="sub-name">KHAZANAH TAMADUN ABBASIYAH</span>
+                </div>
+            </a>
+
+            <!-- MENU BAR TERATUR DENGAN DROPDOWN -->
+            <nav class="nav-menu" id="nav-menu">
+                <a href="#hero" class="nav-link">UTAMA</a>
+                <a href="#modules" class="nav-link">BAB SILIBUS</a>
+                <a href="#history" class="nav-link">KRONOLOGI</a>
+
+                <!-- DROPDOWN 1: MOD PENJELAJAHAN 2D & PETA -->
+                <div class="nav-dropdown">
+                    <button class="dropdown-toggle" type="button" aria-haspopup="true">
+                        <span>TEROKA</span>
+                        <span class="dropdown-caret">▾</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="peta.html" class="dropdown-item">
+                            <span class="item-icon">🗺️</span>
+                            <div class="item-info">
+                                <span class="item-title">Peta Empayar Interaktif</span>
+                                <span class="item-desc">14 tapak kota & laluan ekspedisi</span>
+                            </div>
+                        </a>
+                        <a href="galeri.html" class="dropdown-item">
+                            <span class="item-icon">🏛️</span>
+                            <div class="item-info">
+                                <span class="item-title">Galeri Artifak Interaktif</span>
+                                <span class="item-desc">Koleksi khazanah & titik panas ilmiah</span>
+                            </div>
+                        </a>
+                        <a href="game.html" class="dropdown-item">
+                            <span class="item-icon">🎮</span>
+                            <div class="item-info">
+                                <span class="item-title">Pengembaraan 2D SirahAble</span>
+                                <span class="item-desc">Penerokaan platformer berpandu bab</span>
+                            </div>
+                        </a>
+                        <a href="minigames.html" class="dropdown-item">
+                            <span class="item-icon">🧩</span>
+                            <div class="item-info">
+                                <span class="item-title">Pusat Mini-Games</span>
+                                <span class="item-desc">Susun garis masa & padanan tokoh</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- DROPDOWN 2: PENILAIAN & AKADEMIK -->
+                <div class="nav-dropdown">
+                    <button class="dropdown-toggle" type="button" aria-haspopup="true">
+                        <span>PENILAIAN</span>
+                        <span class="dropdown-caret">▾</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="quiz.html" class="dropdown-item">
+                            <span class="item-icon">⚔️</span>
+                            <div class="item-info">
+                                <span class="item-title">Arena Kuiz SMU</span>
+                                <span class="item-desc">Ujian berfakta silibus KSSM</span>
+                            </div>
+                        </a>
+                        <a href="final_challenge.html" class="dropdown-item">
+                            <span class="item-icon">🏆</span>
+                            <div class="item-info">
+                                <span class="item-title">Cabaran Akhir Silibus</span>
+                                <span class="item-desc">Penilaian penentu gred Mumtaz</span>
+                            </div>
+                        </a>
+                        <a href="achievements.html" class="dropdown-item">
+                            <span class="item-icon">🎖️</span>
+                            <div class="item-info">
+                                <span class="item-title">Galeri Lencana Kehormatan</span>
+                                <span class="item-desc">Koleksi pencapaian & ganjaran XP</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="belajar.html" class="nav-link">NOTA PINTAR</a>
+            </nav>
+
+            <!-- AKSI KANAN -->
+            <div class="nav-actions">
+                <a href="dashboard.html" class="btn-ui-ghost-nav" title="Buka Portal Pelajar">
+                    <span>📊</span> <span>DASHBOARD</span>
+                </a>
+                <button id="btn-open-login" class="btn-ui-solid">
+                    <span>👤</span> <span>LOG MASUK</span>
+                </button>
+                <button class="mobile-menu-toggle" id="btn-mobile-toggle" aria-label="Buka Menu Navigasi">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== 2. CINEMATIC HERO ==================== -->
+    <section class="cinematic-hero" id="hero">
+        
+        <div class="hero-bg-image"></div>
+        <div class="thunder-flash"></div>
+        <div class="atmospheric-smoke"></div>
+        
+        <!-- Sistem Bara Api & Debu Emas -->
+        <div class="particle-system">
+            <div class="ember e1"></div><div class="ember e2"></div><div class="ember e3"></div>
+            <div class="ember e4"></div><div class="ember e5"></div><div class="ember e6"></div>
+            <div class="dust d1"></div><div class="dust d2"></div><div class="dust d3"></div>
+            <div class="dust d4"></div><div class="dust d5"></div><div class="dust d6"></div>
+        </div>
+
+        <div class="hero-content">
+            <div class="quest-badge">
+                <span class="golden-pulse"></span> PENGALAMAN SEJARAH SINEMATIK INTERAKTIF
+            </div>
+            
+            <h1 class="hero-title">
+                KEBANGKITAN & KEJATUHAN<br>
+                <span class="cinematic-gold-text">KHALIFAH ABBASIYAH</span>
+            </h1>
+            
+            <p class="hero-subtitle">
+                Terokai kegemilangan tamadun Islam bermula era penubuhan 750 M, keagungan Madinat al-Salam, revolusi ilmuwan Bayt al-Hikmah, sehingga detik kepungan Baghdad 1258 M berasaskan silibus KSSM & SMU Tingkatan 4.
+            </p>
+            
+            <div class="hero-btn-group">
+                <button id="btn-hero-start" class="btn-ui-gold" onclick="window.location.href='game.html'">
+                    MULAKAN PENGEMBARAAN ➔
+                </button>
+                <button id="btn-nav-journey" class="btn-ui-glass">
+                    PILIHAN MOD BELAJAR
+                </button>
+            </div>
+        </div>
+        
+        <div class="hero-bottom-vignette"></div>
+    </section>
+
+    <!-- ==================== 3. CHAPTER SELECTION (5 BAB SILIBUS LENGKAP) ==================== -->
+    <section class="content-section" id="modules" style="z-index: 10; position: relative;">
+        <div class="section-heading">
+            <span class="tag-gold">PENEROKAAN MODUL PEMBELAJARAN</span>
+            <h2>5 BAB KHUDWAH ABBASIYAH</h2>
+            <p>Klik mana-mana bab untuk membaca sinopsis sejarah, tokoh utama, dan intipati silibus sebelum meneroka.</p>
+        </div>
+
+        <div class="ui-card-grid">
+            <!-- BAB 1 -->
+            <div class="ui-game-card" data-chapter="1">
+                <div class="card-corner top-left"></div><div class="card-corner top-right"></div>
+                <div class="card-corner bottom-left"></div><div class="card-corner bottom-right"></div>
+                
+                <div class="card-visual bg-chap-1">
+                    <div class="card-vignette"></div>
+                    <div class="roman-watermark">I</div>
+                    <div class="card-tag">BAB 1</div>
+                </div>
+                <div class="card-body">
+                    <h3>Fasa Kebangkitan</h3>
+                    <div class="status-track">
+                        <span class="status-label">PENUBUHAN & ASAS (750 M)</span>
+                        <div class="status-bar"><div class="fill gold-fill" style="width:100%"></div></div>
+                    </div>
+                    <p>Revolusi menumbangkan Umayyah dan peranan Khalifah Abu al-Abbas As-Saffah meletakkan asas daulah.</p>
+                    <div class="card-action-cue">MAKLUMAT BAB ➔</div>
+                </div>
+            </div>
+
+            <!-- BAB 2 -->
+            <div class="ui-game-card" data-chapter="2">
+                <div class="card-corner top-left"></div><div class="card-corner top-right"></div>
+                <div class="card-corner bottom-left"></div><div class="card-corner bottom-right"></div>
+                
+                <div class="card-visual bg-chap-baghdad">
+                    <div class="card-vignette"></div>
+                    <div class="roman-watermark">II</div>
+                    <div class="card-tag">BAB 2</div>
+                </div>
+                <div class="card-body">
+                    <h3>Madinat al-Salam</h3>
+                    <div class="status-track">
+                        <span class="status-label">PEMBINAAN BAGHDAD (762 M)</span>
+                        <div class="status-bar"><div class="fill gold-fill" style="width:85%"></div></div>
+                    </div>
+                    <p>Seni bina konsentrik Kota Bulat Baghdad oleh Khalifah Abu Ja'far al-Mansur di lembah Sungai Dajlah.</p>
+                    <div class="card-action-cue">MAKLUMAT BAB ➔</div>
+                </div>
+            </div>
+
+            <!-- BAB 3 (FEATURED) -->
+            <div class="ui-game-card featured" data-chapter="3">
+                <div class="card-corner top-left"></div><div class="card-corner top-right"></div>
+                <div class="card-corner bottom-left"></div><div class="card-corner bottom-right"></div>
+                
+                <div class="card-visual bg-chap-hikmah">
+                    <div class="card-vignette"></div>
+                    <div class="roman-watermark">III</div>
+                    <div class="card-tag">BAB 3</div>
+                </div>
+                <div class="card-body">
+                    <h3>Bayt al-Hikmah</h3>
+                    <div class="status-track">
+                        <span class="status-label">ZAMAN KEEMASAN ILMU (800 M)</span>
+                        <div class="status-bar"><div class="fill emerald-fill" style="width:100%"></div></div>
+                    </div>
+                    <p>Pusat penterjemahan manuskrip agung, makmal falak cerapan, dan kemuncak sains era Harun al-Rasyid.</p>
+                    <div class="card-action-cue">MAKLUMAT BAB ➔</div>
+                </div>
+            </div>
+
+            <!-- BAB 4 -->
+            <div class="ui-game-card" data-chapter="4">
+                <div class="card-corner top-left"></div><div class="card-corner top-right"></div>
+                <div class="card-corner bottom-left"></div><div class="card-corner bottom-right"></div>
+                
+                <div class="card-visual bg-chap-4">
+                    <div class="card-vignette"></div>
+                    <div class="roman-watermark">IV</div>
+                    <div class="card-tag">BAB 4</div>
+                </div>
+                <div class="card-body">
+                    <h3>Pergolakan Kuasa</h3>
+                    <div class="status-track">
+                        <span class="status-label">KRISIS & PENGARUH (861 M)</span>
+                        <div class="status-bar"><div class="fill cyan-fill" style="width:70%"></div></div>
+                    </div>
+                    <p>Dominasi kepimpinan tentera Turki, perebutan takhta khalifah, dan dilema pentadbiran para Wazir.</p>
+                    <div class="card-action-cue">MAKLUMAT BAB ➔</div>
+                </div>
+            </div>
+
+            <!-- BAB 5 -->
+            <div class="ui-game-card" data-chapter="5">
+                <div class="card-corner top-left"></div><div class="card-corner top-right"></div>
+                <div class="card-corner bottom-left"></div><div class="card-corner bottom-right"></div>
+                
+                <div class="card-visual bg-chap-fall">
+                    <div class="card-vignette"></div>
+                    <div class="roman-watermark">V</div>
+                    <div class="card-tag">BAB 5</div>
+                </div>
+                <div class="card-body">
+                    <h3>Detik Kejatuhan 1258</h3>
+                    <div class="status-track">
+                        <span class="status-label">KEPUNGAN MONGOL & IKTIBAR</span>
+                        <div class="status-bar"><div class="fill fire-fill" style="width:90%"></div></div>
+                    </div>
+                    <p>Pencerobohan Hulagu Khan, kemusnahan khazanah Sungai Dajlah, dan iktibar kejatuhan perpaduan ummah.</p>
+                    <div class="card-action-cue">MAKLUMAT BAB ➔</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 4. PLAYER STATISTICS ==================== -->
+    <section class="content-section" style="padding-top: 40px; padding-bottom: 40px;">
+        <div class="ui-stats-container">
+            <div class="stat-light-beam"></div>
+            <div class="ui-stat">
+                <span class="stat-num gold-glow">05</span>
+                <span class="stat-label">BAB SILIBUS LENGKAP</span>
+            </div>
+            <div class="ui-stat">
+                <span class="stat-num gold-glow">508</span>
+                <span class="stat-label">TAHUN PEMERINTAHAN</span>
+            </div>
+            <div class="ui-stat">
+                <span class="stat-num emerald-glow">100%</span>
+                <span class="stat-label">SELARAS SILIBUS KSSM / SMU</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 5. LORE CHRONOLOGY (TIMELINE) ==================== -->
+    <section class="content-section" id="history">
+        <div class="section-heading">
+            <span class="tag-gold">ARKIB KRONOLOGI SEJARAH</span>
+            <h2>GARIS MASA KHILAFAH ABBASIYAH</h2>
+            <p>Klik fasa peristiwa di sebelah kiri untuk melihat hujah dan fakta sejarah tamadun.</p>
+        </div>
+
+        <div class="ui-timeline-panel">
+            <div class="timeline-menu">
+                <button class="timeline-node active" data-era="1"><span class="year">750 M</span><span class="event">1. Kebangkitan Daulah</span></button>
+                <button class="timeline-node" data-era="2"><span class="year">762 M</span><span class="event">2. Pembinaan Baghdad</span></button>
+                <button class="timeline-node" data-era="3"><span class="year">800 M</span><span class="event">3. Kemuncak Zaman Emas</span></button>
+                <button class="timeline-node" data-era="4"><span class="year">861 M</span><span class="event">4. Era Pergolakan Kuasa</span></button>
+                <button class="timeline-node" data-era="5"><span class="year">1258 M</span><span class="event">5. Kejatuhan Baghdad</span></button>
+            </div>
+            
+            <div class="timeline-display">
+                <div class="display-content">
+                    <span class="era-tag" id="era-tag">FASA PENUBUHAN (750 M)</span>
+                    <h3 class="era-title" id="era-heading">Kebangkitan Dinasti Abbasiyah</h3>
+                    <p class="era-desc" id="era-body">Gerakan revolusi yang menumbangkan Khilafah Umayyah di Damsyik dan mengangkat Khalifah Abu al-Abbas As-Saffah sebagai khalifah pertama, memindahkan pusat kuasa empayar ke bumi Iraq.</p>
+                    <a href="minigames.html" class="btn-ui-outline" id="btn-timeline-explore" style="margin-top:20px;">UJI KRONOLOGI DI MINI-GAMES ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 6. SYSTEM MECHANICS ==================== -->
+    <section class="content-section" id="about">
+        <div class="section-heading">
+            <span class="tag-gold">EKOSISTEM PEMBELAJARAN PINTAR</span>
+            <h2>CIRI-CIRI UTAMA SIRAHABLE</h2>
+        </div>
+
+        <div class="feature-grid">
+            <div class="ui-feat-box">
+                <span class="stat-num gold-glow" style="font-size:2rem; margin-bottom:15px;">01</span>
+                <h4>Pengembaraan Interaktif 2D</h4>
+                <p>Navigasi watak dalam persekitaran interaktif berlatarbelakangkan kota Baghdad dan istana khalifah.</p>
+            </div>
+            <div class="ui-feat-box">
+                <span class="stat-num gold-glow" style="font-size:2rem; margin-bottom:15px;">02</span>
+                <h4>Mini-Games Pedagogi</h4>
+                <p>Mekanik pembelajaran aktif: menyusun garis masa, membina kota bulat, memadankan sarjana, dan kalibrasi astrolab.</p>
+            </div>
+            <div class="ui-feat-box">
+                <span class="stat-num emerald-glow" style="font-size:2rem; margin-bottom:15px;">03</span>
+                <h4>Scaffolding & Mod Santai</h4>
+                <p>Sistem petunjuk berpandu dan mod mesra pembelajaran inklusif tanpa tekanan kehilangan nyawa.</p>
+            </div>
+            <div class="ui-feat-box">
+                <span class="stat-num gold-glow" style="font-size:2rem; margin-bottom:15px;">04</span>
+                <h4>Sistem XP & Gred Mumtaz</h4>
+                <p>Kumpul mata ilmu, bina rekod streak harian, dan capai pencapaian tertinggi piawaian SMU.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 7. CALL TO ACTION ==================== -->
+    <section class="content-section" id="start-play">
+        <div class="ui-cta-box glass-panel" style="text-align:center; padding: 60px 40px; border: 1px solid var(--border-gold-strong); box-shadow: 0 0 40px rgba(212,175,55,0.15);">
+            <h2 style="font-family: var(--font-head); font-size: clamp(2rem, 3.5vw, 2.7rem); color: #FFF; margin-bottom: 12px;">BERSEDIA MENGUASAI SEJARAH?</h2>
+            <p style="color: var(--clr-text-dim); font-size: 1.1rem; max-width: 650px; margin: 0 auto 30px;">Sertai ratusan pelajar lain meneroka keagungan Khilafah Abbasiyah secara visual dan interaktif hari ini.</p>
+            <div style="display:flex; justify-content:center; gap:18px; flex-wrap:wrap;">
+                <button id="btn-cta-launch" class="btn-ui-gold" onclick="window.location.href='game.html'">MAINKAN PENGEMBARAAN 2D ➔</button>
+                <a href="quiz.html" class="btn-ui-glass">MASUK KE ARENA KUIZ</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 8. FOOTER ==================== -->
+    <footer class="ui-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>SIRAHABLE</h3>
+                <p>Enjin Pembelajaran Tarikh Islamiah. Merevolusikan pendidikan sejarah menerusi pengalaman Cinematic Fantasy Game.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Pautan Sistem</h4>
+                <a href="minigames.html">Pusat Mini-Games</a>
+                <a href="quiz.html">Arena Kuiz Penilaian</a>
+                <a href="game.html">Dunia Pengembaraan</a>
+                <a href="#" id="link-belajar-footer">Pusat Nota Pintar</a>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>© 2026 SirahAble Educational Technologies. Hak Cipta Terpelihara.</p>
+        </div>
+    </footer>
+
+    <!-- ==================== MODAL: MAKLUMAT LENGKAP BAB SILIBUS ==================== -->
+    <div id="modal-chapter-info" class="modal-overlay hidden">
+        <div class="ui-modal-box chapter-info-modal-box">
+            <button class="btn-close-modal" data-close="modal-chapter-info" aria-label="Tutup Maklumat">✕</button>
+            
+            <div class="ci-header">
+                <div class="ci-badge-row">
+                    <span class="ci-badge-gold" id="ci-number">BAB 1</span>
+                    <span class="ci-badge-era" id="ci-era">750 M (132 H)</span>
+                </div>
+                <h3 class="ci-title" id="ci-title">Fasa Kebangkitan Daulah Abbasiyah</h3>
+                <div class="ci-subtitle" id="ci-tag">PENUBUHAN & ASAS KERAJAAN</div>
+            </div>
+
+            <div class="ci-body-scroll">
+                <!-- Sinopsis Sejarah -->
+                <div class="ci-section">
+                    <h4 class="ci-section-title">LATAR BELAKANG SEJARAH</h4>
+                    <p class="ci-synopsis" id="ci-synopsis">
+                        Gerakan revolusi yang menumbangkan Khilafah Umayyah dan meletakkan asas Daulah Abbasiyah.
+                    </p>
+                </div>
+
+                <!-- Grid Fakta Kunci -->
+                <div class="ci-grid-facts">
+                    <div class="ci-fact-card">
+                        <span class="ci-fact-label">TOKOH UTAMA</span>
+                        <div class="ci-fact-val" id="ci-figures">-</div>
+                    </div>
+                    <div class="ci-fact-card">
+                        <span class="ci-fact-label">PERISTIWA KUNCI</span>
+                        <div class="ci-fact-val" id="ci-event">-</div>
+                    </div>
+                    <div class="ci-fact-card">
+                        <span class="ci-fact-label">PUSAT PENTADBIRAN</span>
+                        <div class="ci-fact-val" id="ci-location">-</div>
+                    </div>
+                </div>
+
+                <!-- Kandungan Silibus KSSM -->
+                <div class="ci-section">
+                    <h4 class="ci-section-title">KANDUNGAN SILIBUS & TOPIK KUNCI</h4>
+                    <ul class="ci-topics-list" id="ci-topics">
+                        <!-- Populated dynamically -->
+                    </ul>
+                </div>
+
+                <!-- Iktibar Sejarah -->
+                <div class="ci-lesson-box">
+                    <span class="ci-lesson-tag">IKTIBAR & HIKMAH SEJARAH</span>
+                    <p class="ci-lesson-text" id="ci-lesson">-</p>
+                </div>
+            </div>
+
+            <!-- Footer Tindakan Pelajar -->
+            <div class="ci-footer-actions">
+                <button type="button" class="btn-ci-secondary" id="ci-btn-close">KEMBALI KE UTAMA</button>
+                <div class="ci-footer-right">
+                    <button type="button" class="btn-ci-learn" id="ci-btn-learn">BACA NOTA BAB</button>
+                    <a href="game.html" class="btn-ci-game" id="ci-btn-game">MAINKAN PENGEMBARAAN 2D ➔</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL: MODE SELECTION ==================== -->
+    <div id="modal-journey" class="modal-overlay hidden">
+        <div class="ui-modal-box">
+            <button class="btn-close-modal" data-close="modal-journey">✕</button>
+            <div class="modal-header-centered">
+                <h3>PILIHAN MOD PEMBELAJARAN</h3>
+                <p>Pilih laluan pengembaraan ilmu anda.</p>
+            </div>
+            
+            <div class="modal-split">
+                <div class="mod-card" id="mode-academic-mode" onclick="window.location.href='quiz.html'">
+                    <h4>ARENA KUIZ</h4>
+                    <p>Pertempuran minda menggunakan format soalan berfakta SMU & KSSM.</p>
+                </div>
+                <div class="mod-card" id="mode-story-mode" onclick="window.location.href='game.html'">
+                    <h4>PENGEMBARAAN 2D</h4>
+                    <p>Teroka latar belakang sejarah secara visual 2D dan selesaikan mini-game berpandu.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL: PLAYER LOGIN ==================== -->
+    <div id="modal-auth" class="modal-overlay hidden">
+        <div class="ui-modal-box auth-box">
+            <button class="btn-close-modal" data-close="modal-auth">✕</button>
+            <div class="modal-header-centered">
+                <h3 id="auth-title">LOG MASUK PELAJAR</h3>
+                <p id="auth-desc" style="color:var(--clr-text-dim); font-size:0.85rem; margin-top:5px;">Masukkan kredensial anda.</p>
+            </div>
+
+            <p id="auth-gate-msg" style="display:none; color:var(--clr-gold-light); text-align:center; font-size:0.85rem; margin-bottom:15px; text-shadow: 0 0 10px var(--clr-gold);">Akses Pusat Nota Pintar memerlukan log masuk.</p>
+
+            <form id="form-auth">
+                <div class="input-group hidden" id="group-username">
+                    <input type="text" id="auth-username" name="username" placeholder="Nama Pelajar">
+                </div>
+                <div class="input-group">
+                    <input type="text" id="auth-email" name="email" placeholder="Emel / Nama Pengguna / ID Pelajar" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="auth-password" name="password" placeholder="Kata Laluan" required>
+                </div>
+                <div class="form-feedback-msg" style="display:none; color:#EF4444; font-size:0.85rem; text-align:center; margin-bottom:10px;"></div>
+                
+                <button type="submit" class="btn-ui-gold" style="width: 100%; margin-top:10px;" id="btn-submit-auth">LOG MASUK</button>
+            </form>
+
+            <div class="auth-footer">
+                <p id="auth-toggle-text">Pelajar Baharu? <a href="register.html" id="auth-toggle-link">Daftar Di Sini</a></p>
+                <a href="admin.html" class="teacher-link">Portal Pentadbir Guru ➔</a>
+            </div>
+        </div>
+    <!-- Audio Latar Belakang (Arabian Nights Desert Vibes) -->
+    <audio id="bgm-player" loop preload="auto">
+        <source src="Assets/audio/arabian_nights.m4a" type="audio/mp4">
+    </audio>
+    <div id="yt-bgm-container" style="position:fixed; bottom:-9999px; left:-9999px; width:1px; height:1px; opacity:0; pointer-events:none;"></div>
+
+    <script src="Assets/js/sound-effects.js"></script>
+    <script src="Assets/js/homepage.js"></script>
+    
+    <script>
+        // Memastikan Modals Berfungsi
+        document.getElementById('btn-nav-journey')?.addEventListener('click', () => {
+            document.getElementById('modal-journey').classList.remove('hidden');
+        });
+        document.getElementById('btn-open-login')?.addEventListener('click', () => {
+            document.getElementById('modal-auth').classList.remove('hidden');
+        });
+
+        // Interaktiviti Garis Masa (Timeline Fix)
+        document.querySelectorAll('.timeline-node').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.timeline-node').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

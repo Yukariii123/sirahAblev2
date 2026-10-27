@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SirahAble — Tetapan Akaun Pelajar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Assets/css/homepage.css">
+    <link rel="stylesheet" href="Assets/css/settings.css">
+</head>
+<body class="settings-theme">
+
+    <div class="islamic-grid-pattern"></div>
+
+    <header class="main-nav">
+        <div class="nav-container">
+            <a href="dashboard.html" class="brand-logo">
+                <span class="rub-el-hizb">۞</span>
+                <div class="brand-text">
+                    <span class="title">SIRAHABLE</span>
+                    <span class="subtitle">TETAPAN AKAUN</span>
+                </div>
+            </a>
+            <div class="nav-actions">
+                <a href="dashboard.html" class="btn-ghost">Kembali ke Dashboard</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="settings-wrapper">
+        
+        <section id="settings-card" class="settings-container">
+            <div class="settings-form-card glass-panel">
+                
+                <div class="form-header">
+                    <span class="rub-el-hizb gold">۞</span>
+                    <h2>Tukar Kata Laluan</h2>
+                    <p>Untuk keselamatan, sila masukkan kata laluan semasa anda sebelum menetapkan yang baharu.</p>
+                </div>
+
+                <form id="form-change-password" novalidate>
+                    <div class="form-group">
+                        <label for="current-password">Kata Laluan Semasa</label>
+                        <input type="password" id="current-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Kata Laluan Baharu (Minimum 8 aksara)</label>
+                        <input type="password" id="new-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password-confirm">Sahkan Kata Laluan Baharu</label>
+                        <input type="password" id="new-password-confirm" required>
+                    </div>
+
+                    <div id="form-feedback" class="form-feedback-msg"></div>
+
+                    <button type="submit" class="btn-primary-hero btn-full">KEMASKINI KATA LALUAN</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script src="Assets/js/settings.js"></script>
+</body>
+</html>

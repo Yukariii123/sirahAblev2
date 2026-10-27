@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SirahAble — Cabaran Akhir Tamadun Abbasiyah</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Assets/css/homepage.css">
+    <link rel="stylesheet" href="Assets/css/quiz.css">
+</head>
+<body class="quiz-theme">
+
+    <div class="islamic-grid-pattern"></div>
+
+    <header class="main-nav">
+        <div class="nav-container">
+            <a href="dashboard.html" class="brand-logo">
+                <span class="rub-el-hizb">۞</span>
+                <div class="brand-text">
+                    <span class="title">SIRAHABLE</span>
+                    <span class="subtitle">CABARAN AKHIR SILIBUS</span>
+                </div>
+            </a>
+            <div class="nav-actions">
+                <a href="dashboard.html" class="btn-ghost">Batal & Kembali ke Dashboard</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="quiz-wrapper">
+        
+        <!-- Paparan Soalan Ujian Akhir -->
+        <section id="final-exam-card" class="quiz-container">
+            <div class="quiz-play-card glass-panel">
+                
+                <div class="quiz-gameplay-header">
+                    <span class="q-badge" id="exam-q-index">SOALAN 1 / 10</span>
+                    <div class="timer-badge" id="exam-timer">
+                        <span style="font-size:0.75rem; color:var(--color-gold); font-weight:700;">MASA:</span> <span id="exam-timer-sec">30</span>s
+                    </div>
+                </div>
+
+                <div class="quiz-progress-bar">
+                    <div class="quiz-progress-fill" id="exam-progress-fill" style="width: 10%;"></div>
+                </div>
+
+                <div class="question-container">
+                    <span class="q-category-tag" id="exam-topic-tag">TOPIK: PENUBUHAN & KEPIMPINAN</span>
+                    <h2 class="question-text" id="exam-question-text">Memuatkan instrumen penilaian akhir...</h2>
+                </div>
+
+                <div class="options-grid" id="exam-options-grid"></div>
+
+                <div class="academic-rationale hidden" id="exam-feedback-box">
+                    <div class="rationale-header">
+                        <h4 id="exam-status-title">Analisis Hujah Sejarah</h4>
+                    </div>
+                    <p id="exam-status-text"></p>
+                    <button class="btn-next-question" id="btn-next-exam-q">Soalan Seterusnya →</button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Skrin Keputusan Rasmi SMU -->
+        <section id="final-result-card" class="quiz-container hidden-view">
+            <div class="result-card glass-panel">
+                <div class="result-badge-anim" style="font-family:'Cinzel',serif; font-size:2.2rem; font-weight:900; color:var(--color-gold); letter-spacing:2px;">MUMTAZ</div>
+                <h2 class="result-title">KEPUTUSAN PENILAIAN AKHIR</h2>
+                <p class="result-subtitle">Analisis Pencapaian Tarikh Islamiah Khilafah Abbasiyah</p>
+
+                <div class="score-circle">
+                    <span class="score-val" id="exam-final-percent">85%</span>
+                    <span class="score-label">MARKAH GRED</span>
+                </div>
+
+                <div class="result-metrics">
+                    <div class="metric-box">
+                        <span class="metric-num text-gold" id="exam-xp-earned">+150 XP</span>
+                        <span class="metric-label">Mata Ilmu Akhir</span>
+                    </div>
+                    <div class="metric-divider"></div>
+                    <div class="metric-box">
+                        <span class="metric-num text-emerald" id="exam-correct-ratio">9 / 10</span>
+                        <span class="metric-label">Jawapan Tepat</span>
+                    </div>
+                    <div class="metric-divider"></div>
+                    <div class="metric-box">
+                        <span class="metric-num text-gold-bright" id="exam-final-grade">MUMTAZ</span>
+                        <span class="metric-label">Gred Rasmi</span>
+                    </div>
+                </div>
+
+                <div class="result-actions">
+                    <button class="btn-primary-hero" onclick="window.location.reload()">[RETRY] Cuba Semula</button>
+                    <button class="btn-secondary-hero" id="btn-view-answers">[VIEW ANSWERS] Semak Jawapan</button>
+                    <button class="btn-secondary-hero" onclick="window.location.href='dashboard.html'">[BACK TO DASHBOARD]</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skrin Semakan Jawapan -->
+        <section id="final-review-card" class="quiz-container hidden-view">
+            <div class="review-card glass-panel">
+                <div class="review-header">
+                    <div>
+                        <h2 class="result-title">Semakan Jawapan Cabaran Akhir</h2>
+                        <p class="result-subtitle">Analisis setiap soalan untuk pengukuhan akademik.</p>
+                    </div>
+                    <button id="btn-back-to-results" class="btn-ghost">Kembali ke Keputusan</button>
+                </div>
+                <div id="review-content-area" class="review-content">
+                    <!-- Jawapan akan dipaparkan di sini oleh JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="Assets/js/sound-effects.js"></script>
+    <script src="Assets/js/final-challenge.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+# Python Virtual Environment
+.venv/
+venv/
+ENV/
+__pycache__/
+*.pyc
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary & Scratch files
+scratch/
+*.log
+
+# OS generated
+Thumbs.db
+Desktop.ini
+.DS_Store

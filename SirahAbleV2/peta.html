@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SirahAble — Peta Geografi Sebenar Empayar Abbasiyah & Penceritaan Sinematik</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet.js CSS untuk Peta Geografi Sebenar Dunia -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <link rel="stylesheet" href="Assets/css/peta.css?v=4">
+</head>
+<body class="peta-body">
+
+    <!-- Navigasi Atas -->
+    <header class="peta-navbar">
+        <a href="dashboard.html" class="peta-brand">
+            <div class="peta-logo-badge">۞</div>
+            <div class="peta-title-wrap">
+                <h1>KARTOGRAFI EMPAYAR ABBASIYAH</h1>
+                <p>PETA GEOGRAFI SEBENAR BUMI ISLAM & PENCERITAAN EKSPEDISI</p>
+            </div>
+        </a>
+        <div class="peta-nav-tools">
+            <a href="dashboard.html" class="tool-btn">
+                <span>📊</span> Dashboard
+            </a>
+            <a href="belajar.html" class="tool-btn">
+                <span>📖</span> Nota Pintar
+            </a>
+            <a href="galeri.html" class="tool-btn" style="border-color:#d4af37; color:#fef08a;">
+                <span>🏛️</span> Galeri Artifak
+            </a>
+            <a href="minigames.html" class="tool-btn">
+                <span>🧩</span> Mini-Games
+            </a>
+            <a href="quiz.html" class="tool-btn">
+                <span>⚔️</span> Arena Kuiz
+            </a>
+            <a href="game.html" class="tool-btn" style="background:linear-gradient(135deg, rgba(212,175,55,0.25), rgba(78,204,163,0.25)); border-color:#d4af37; color:#fef08a;">
+                <span>🎮</span> Pengembaraan 2D
+            </a>
+        </div>
+    </header>
+
+    <!-- Penukar Gaya Peta Geografi Sebenar (Satelit Bumi Asli / Topografi / NatGeo / Jalanan) -->
+    <div class="map-style-switcher">
+        <button class="style-btn" data-style="satellite">
+            <span>🛰️</span> Satelit Bumi Asli
+        </button>
+        <button class="style-btn" data-style="topo">
+            <span>⛰️</span> Topografi & Muka Bumi
+        </button>
+        <button class="style-btn active" data-style="natgeo">
+            <span>📜</span> Atlas Purba (NatGeo)
+        </button>
+        <button class="style-btn" data-style="osm">
+            <span>🗺️</span> Peta Jalanan Dunia
+        </button>
+    </div>
+
+    <!-- Penapis Kategori Lokasi (Kanan Atas) -->
+    <div class="category-filter-bar">
+        <button class="filter-btn active" data-category="all">
+            <span>🌟</span> Semua
+        </button>
+        <button class="filter-btn" data-category="capital">
+            <span>👑</span> Ibu Kota
+        </button>
+        <button class="filter-btn" data-category="knowledge">
+            <span>📚</span> Sains & Hadis
+        </button>
+        <button class="filter-btn" data-category="trade">
+            <span>🐫</span> Laluan Sutera
+        </button>
+        <button class="filter-btn" data-category="battle">
+            <span>⚔️</span> Pertempuran
+        </button>
+    </div>
+
+    <!-- Kanvas Peta Geografi Sebenar (Leaflet Engine) -->
+    <div id="real-map"></div>
+
+    <!-- HUD MOD PENCERITAAN EKSPEDISI SINEMATIK (Kiri Bawah) -->
+    <section class="story-journey-hud" id="story-hud">
+        <div class="story-hud-top">
+            <span class="story-step-badge" id="story-badge-num">
+                <span>🚀</span> Babak 1 / 9
+            </span>
+            <span class="story-year-pill" id="story-year-text">750 M (132 H)</span>
+        </div>
+
+        <h2 class="story-title" id="story-title-text">Revolusi Sungai Zab & Kejatuhan Umayyah</h2>
+        <div class="story-arabic-subtitle" id="story-ar-subtitle">مَعْرَكَةُ الزَّاب الأَعْلَى</div>
+
+        <p class="story-narrative-text" id="story-narrative-p">
+            Di tebing Sungai Zab (utara Iraq kini), tentera revolusi Abbasiyah menewaskan khalifah terakhir Umayyah, Marwan II. Kemenangan bersejarah ini menamatkan era Bani Umayyah dan memulakan fasa 500 tahun Khilafah Abbasiyah.
+        </p>
+
+        <div class="story-hud-actions">
+            <button class="story-btn-audio" id="btn-story-audio">
+                <span>🔊</span> Dengar Suara TV3
+            </button>
+            <button class="story-btn-primary" id="btn-story-autoplay">
+                <span>▶</span> Auto-Play
+            </button>
+            <div class="story-nav-arrows">
+                <button class="arrow-btn" id="btn-story-prev" title="Babak Sebelumnya" disabled>◀</button>
+                <button class="arrow-btn" id="btn-story-next" title="Babak Seterusnya">▶</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PANEL PENYIASAT DETAIL KOTA & KUIZ XP (Kanan Atas) -->
+    <aside class="inspector-panel-right closed" id="inspector-panel">
+        <button class="inspector-close-btn" id="btn-close-insp" title="Tutup">✕</button>
+        
+        <div style="margin-bottom: 12px;">
+            <span class="story-step-badge" id="loc-insp-tag" style="background:rgba(212,175,55,0.2);">Ibu Kota & Sains</span>
+            <h3 id="loc-insp-title" style="font-family:'Cinzel',serif; font-size:1.3rem; color:#FFF; margin-top:6px;">Baghdad</h3>
+            <div id="loc-insp-arabic" style="font-family:'Amiri',serif; font-size:1.4rem; color:var(--map-gold);">بَغْدَاد</div>
+            <div id="loc-insp-era" style="font-size:0.8rem; color:#94a3b8; margin-top:2px;">⏳ Era: 762 M</div>
+        </div>
+
+        <p id="loc-insp-desc" style="font-size:0.88rem; line-height:1.6; color:#cbd5e1;">
+            Pusat pentadbiran agung Khilafah Abbasiyah yang diasaskan oleh Khalifah Al-Mansur.
+        </p>
+
+        <div class="figures-box">
+            <h4>Tokoh Terbilang</h4>
+            <p id="loc-insp-figures">Khalifah Al-Mansur, Harun al-Rasyid, Al-Khwarizmi</p>
+        </div>
+
+        <!-- Mini Kuiz Geografi (+15 XP) -->
+        <div id="loc-quiz-slot"></div>
+    </aside>
+
+    <!-- Leaflet.js JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="Assets/js/sound-effects.js"></script>
+    <script src="Assets/js/peta.js?v=4"></script>
+</body>
+</html>

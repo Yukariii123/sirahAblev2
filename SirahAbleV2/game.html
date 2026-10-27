@@ -1,0 +1,226 @@
+
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SirahAble — Pengembaraan Interaktif Sejarah Abbasiyah</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="Assets/css/homepage.css">
+    <link rel="stylesheet" href="Assets/css/game.css">
+</head>
+<body class="game-viewport-body">
+
+    <!-- SKRIN PENGENALAN SETIAP BAB (Loading Screen) -->
+    <div id="chapter-splash" class="splash-overlay hidden">
+        <div class="academic-spinner" style="margin-bottom: 20px;"></div>
+        <h1 id="splash-title">BAB 1</h1>
+        <p id="splash-desc">Memuatkan persekitaran...</p>
+    </div>
+
+    <!-- SKRIN TAMAT PERMAINAN -->
+    <div id="end-game-splash" class="splash-overlay hidden">
+        <div class="end-game-stars" id="end-stars-container">
+            <span class="end-star">★</span>
+            <span class="end-star">★</span>
+            <span class="end-star">★</span>
+        </div>
+        <h1 class="gold-text" style="font-size: 3.5rem; margin-top: 10px;">TAHNIAH ADIK JUARA!</h1>
+        <p style="font-size: 1.25rem; margin-bottom: 20px; text-align: center; max-width: 650px;">
+            Adik telah melengkapkan kesemua 5 Bab Sejarah Khilafah Abbasiyah bersama Si Bulus Baghdad!
+        </p>
+        <div class="end-stats-pill">
+            <span>🪙 Dinar: <b id="end-dinar-count">0</b></span>
+            <span>⭐ Jumlah XP: <b id="end-xp-count">0</b></span>
+            <span>🏆 Gelaran: <b>Sarjana Cilik Tamadun</b></span>
+        </div>
+        <button onclick="window.location.href='dashboard.html'" class="btn-primary" style="padding: 15px 32px; font-size: 1.1rem; margin-top: 25px;">Kembali ke Dashboard Utama ➔</button>
+    </div>
+
+    <!-- KANVAS UTAMA PERMAINAN -->
+    <div id="game-stage">
+        <canvas id="gameCanvas" width="1280" height="720"></canvas>
+    </div>
+
+    <!-- PAPARAN STATUS HUD -->
+    <header class="game-hud">
+        <div class="hud-left">
+            <div class="hud-lives" id="hud-lives" title="Peluang Jawapan">
+                <span class="life-pip active" title="Peluang 1"></span>
+                <span class="life-pip active" title="Peluang 2"></span>
+                <span class="life-pip active" title="Peluang 3"></span>
+            </div>
+            <button id="btn-character-toggle" class="hud-pill kid-btn" title="Tukar Karakter Kanak-Kanak (Adik Aiman / Adik Sarah)">
+                <span id="char-avatar-icon">👦</span> <span id="char-name-label">Aiman</span>
+            </button>
+            <button id="btn-sound-toggle" class="hud-pill sound-btn" title="Kesan Bunyi & Audio (Buka / Tutup)">
+                <span id="sound-icon">🔊</span>
+            </button>
+            <a href="dashboard.html" class="btn-exit-game">✕ Keluar</a>
+        </div>
+
+        <div class="hud-center">
+            <span class="chapter-badge" id="hud-chapter-title">BAB 1 – KEBANGKITAN DINASTI ABBASIYAH</span>
+            <div class="hud-stars" id="hud-stars" title="Tahap Bintang Bab Ini">
+                <span class="star-pip active" id="star-1">★</span>
+                <span class="star-pip active" id="star-2">★</span>
+                <span class="star-pip active" id="star-3">★</span>
+            </div>
+        </div>
+
+        <div class="hud-right">
+            <div class="hud-pill dinar-pill" title="Dinar Emas Terkumpul">
+                <span class="dinar-icon">🪙</span> <span id="hud-dinar-val">0</span>
+            </div>
+            <button id="btn-fun-fact" class="hud-pill fun-fact-badge" title="Fakta Menarik Sejarah untuk Adik">
+                💡 <span class="hide-mobile">Tahukah Adik?</span>
+            </button>
+            <button id="btn-toggle-study-mode" class="study-mode-badge" title="Tukar antara Mod Pengembaraan & Mod Santai Bebas Penalti">MOD PENGEMBARAAN</button>
+            <div class="hud-pill">
+                <span class="xp-label">XP</span> <span id="hud-xp-val">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- PENJEJAK MISI & KOMPAS KEMBARA (QUEST TRACKER) -->
+    <div class="quest-tracker" id="quest-tracker">
+        <div class="quest-tracker-header" id="btn-toggle-quest-list" title="Klik untuk lihat senarai modul & misi bab">
+            <span class="quest-icon">📜</span>
+            <span class="quest-title" id="quest-summary">Misi: 0/4 Selesai</span>
+            <span class="quest-arrow" id="quest-expand-icon">▾</span>
+        </div>
+        <div class="quest-dropdown hidden" id="quest-dropdown-list">
+            <!-- Senarai tugasan dijana secara dinamik dalam game-core.js -->
+        </div>
+    </div>
+
+    <!-- PANDUAN INTERAKSI PEMAIN -->
+    <div id="interaction-prompt" class="interaction-pill hidden">
+        <span class="key-cap">E</span> <span id="prompt-text">Tekan E untuk berinteraksi</span>
+    </div>
+
+    <!-- NOTIFIKASI TOAST -->
+    <div id="toast-container" class="toast-wrapper"></div>
+
+    <!-- MODAL DIALOG PENCERITAAN -->
+    <div id="dialogue-modal" class="modal-backdrop hidden">
+        <div class="dialogue-panel glass-panel">
+            <div class="panel-header">
+                <div>
+                    <span class="gold-badge" id="dialogue-tag">PERISTIWA SEJARAH</span>
+                    <h2 id="dialogue-title">Tajuk Cerita</h2>
+                </div>
+            </div>
+            
+            <div class="panel-body">
+                <p id="dialogue-narration" class="narration-text"></p>
+                
+                <div id="dialogue-hint-box" class="hint-banner hidden">
+                    <span class="hint-tag">PETUNJUK:</span> <span id="dialogue-hint-text"></span>
+                </div>
+
+                <div id="story-actions" class="action-buttons-group">
+                    <button type="button" class="btn-voice-toggle" id="btn-toggle-voice" title="Tukar Karakter Suara Melayu (Osman / Yasmin)">
+                        <span class="voice-avatar">🎙️</span>
+                        <span id="voice-name-label">Suara: Osman (Lelaki)</span>
+                    </button>
+                    <button class="btn-secondary btn-audio-play" id="btn-listen-speech">
+                        <span class="audio-status-icon">🔊</span>
+                        <span class="audio-status-text">DENGAR PENCERITAAN</span>
+                    </button>
+                    <button class="btn-primary" id="btn-story-continue">TERUSKAN →</button>
+                </div>
+
+                <div id="decision-block" class="decision-container hidden">
+                    <h3 id="question-text" class="question-title">Soalan Ujian Minda</h3>
+                    <div id="options-container" class="options-grid"></div>
+                </div>
+
+                <div id="academic-feedback" class="feedback-card hidden">
+                    <div class="feedback-header-row">
+                        <h4 id="feedback-status"></h4>
+                        <button type="button" class="btn-voice-mini" id="btn-listen-feedback" title="Dengar Ulasan Guru dalam Suara Melayu">
+                            <span>🔊</span> <span>Dengar Ulasan</span>
+                        </button>
+                    </div>
+                    <p id="feedback-explanation"></p>
+                    <button class="btn-primary" id="btn-close-dialogue">Teruskan Pengembaraan →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL KHAS MINI-GAME INTERAKTIF -->
+    <div id="minigame-modal" class="modal-backdrop hidden">
+        <div class="dialogue-panel glass-panel minigame-card">
+            <div class="panel-header">
+                <div>
+                    <span class="gold-badge" id="minigame-badge">CABARAN SARJANA TAMADUN</span>
+                    <h2 id="minigame-title">Mini-Game</h2>
+                </div>
+                <button id="btn-close-minigame" class="btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;">✕ Keluar Misi</button>
+            </div>
+            <div class="panel-body" id="minigame-body"></div>
+        </div>
+    </div>
+
+    <!-- MODAL PETI GANJARAN EMAS & LETUPAN CONFETTI -->
+    <div id="chest-modal" class="modal-backdrop hidden">
+        <div class="dialogue-panel glass-panel chest-card">
+            <canvas id="confetti-canvas"></canvas>
+            <div class="chest-content">
+                <span class="gold-badge" id="chest-tag">TAHNIAH ADIK JUARA!</span>
+                <h2 id="chest-title" style="margin-top: 10px; font-size: 1.8rem;">Peti Khazanah Abbasiyah</h2>
+                <div class="chest-box-wrapper" id="chest-box-wrapper">
+                    <div class="chest-emoji" id="chest-emoji">🎁</div>
+                    <div class="chest-glow-ring"></div>
+                </div>
+                <p id="chest-message" class="chest-desc">Klik peti emas ini untuk buka hadiah misteri!</p>
+                <div id="chest-rewards" class="chest-rewards-grid hidden">
+                    <div class="reward-tag"><span class="reward-icon">🪙</span> <span id="reward-dinar-text">+5 Dinar</span></div>
+                    <div class="reward-tag"><span class="reward-icon">⭐</span> <span id="reward-xp-text">+30 XP</span></div>
+                    <div class="reward-tag"><span class="reward-icon">🎖️</span> <span id="reward-badge-text">3 Bintang Penuh!</span></div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <button id="btn-open-chest" class="btn-primary btn-chest-open">Buka Peti Emas! ✨</button>
+                    <button id="btn-chest-continue" class="btn-primary hidden" style="padding: 12px 28px;">Teruskan Kembara →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL TAHUKAH ADIK (KOMIK & FAKTA AJAIB KANAK-KANAK) -->
+    <div id="fun-fact-modal" class="modal-backdrop hidden">
+        <div class="dialogue-panel glass-panel fun-fact-card">
+            <div class="panel-header">
+                <div>
+                    <span class="gold-badge">💡 FAKTA AJAIB SEJARAH</span>
+                    <h2 id="fun-fact-title">Tahukah Adik?</h2>
+                </div>
+                <button id="btn-close-fun-fact" class="btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;">✕ Tutup</button>
+            </div>
+            <div class="panel-body fun-fact-layout">
+                <div class="fun-fact-mascot">
+                    <div class="mascot-avatar">🐱</div>
+                    <div class="mascot-tag">Si Bulus Baghdad</div>
+                </div>
+                <div class="fun-fact-balloon">
+                    <p id="fun-fact-text">Memuatkan fakta menarik...</p>
+                    <div class="fun-fact-trivia-tag" id="fun-fact-quote">"Ilmu itu ibarat cahaya yang menerangi seluruh alam!"</div>
+                </div>
+            </div>
+            <div style="text-align: right; padding-top: 15px;">
+                <button id="btn-fun-fact-ok" class="btn-primary" style="padding: 10px 24px;">Wah, Hebatnya! 👍</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="Assets/js/sound-effects.js"></script>
+    <script src="Assets/js/game-core.js"></script>
+</body>
+</html>

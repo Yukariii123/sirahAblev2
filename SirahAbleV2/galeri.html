@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏛️ Galeri Khazanah Abbasiyah — Muzium Maya Interaktif | SirahAble</title>
+    <meta name="description" content="Koleksi artifak bersejarah Tamadun Islam Zaman Kerajaan Abbasiyah dalam visual beresolusi tinggi 2D interaktif dengan pemeriksaan kanta teliti, titik panas ilmiah dan silibus SPM.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Muzium Stylesheet -->
+    <link rel="stylesheet" href="Assets/css/galeri.css">
+</head>
+<body class="galeri-body">
+
+    <!-- Latar Belakang Debu Emas & Cahaya Ambien -->
+    <canvas id="museum-canvas" class="museum-canvas-bg"></canvas>
+    <div class="museum-ambient-glow"></div>
+
+    <!-- Navigasi Utama Galeri -->
+    <header>
+        <nav id="galeri-navbar" class="galeri-navbar">
+            <a href="dashboard.html" class="galeri-brand">
+                <div class="brand-crest-box">🏛️</div>
+                <div class="brand-title-wrap">
+                    <h1>SIRA<span style="color:#D4AF37;">HABLE</span></h1>
+                    <p>MUZIUM MAYA KHAZANAH ABBASIYAH</p>
+                </div>
+            </a>
+
+            <div class="galeri-nav-links">
+                <a href="dashboard.html" class="nav-item-btn">📊 Dashboard</a>
+                <a href="belajar.html" class="nav-item-btn">📖 Nota Pintar</a>
+                <a href="peta.html" class="nav-item-btn">🗺️ Peta Empayar</a>
+                <a href="galeri.html" class="nav-item-btn active">🏛️ Galeri Artifak</a>
+                <a href="minigames.html" class="nav-item-btn">🧩 Mini-Games</a>
+                <a href="quiz.html" class="nav-item-btn">⚔️ Arena Kuiz</a>
+                <a href="game.html" class="nav-item-btn primary">🎮 Pengembaraan 2D</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Showcase Section -->
+    <main>
+        <section class="galeri-hero">
+            <div class="museum-badge">
+                <span>✨</span> ARSIP KHAS KERAJAAN ABBASIYAH (750 – 1258 M)
+            </div>
+            <h1 class="hero-museum-title">
+                Galeri Visual & Khazanah <br>
+                <span class="gold-gradient">Tamadun Zaman Keemasan</span>
+            </h1>
+            <p class="hero-museum-desc">
+                Saksikan peninggalan teknologi, falsafah, mata wang dan kejuruteraan agung dari kota Baghdad dan Baitul Hikmah. 
+                Pilih artifak untuk membuka ruang pemeriksaan 2D interaktif terperinci, kanta pembesar, dan titik panas berfakta silibus KSSM SPM.
+            </p>
+
+            <!-- Stats Bar -->
+            <div class="museum-stats-bar">
+                <div class="stat-pill">
+                    <span>🪙</span> Koleksi: <span class="highlight">10 Artifak Agung</span>
+                </div>
+                <div class="stat-pill">
+                    <span>🔬</span> Ketelitian: <span class="highlight">Definisi Tinggi 8K</span>
+                </div>
+                <div class="stat-pill">
+                    <span>📍</span> Interaktiviti: <span class="highlight">30 Titik Panas Hotspot</span>
+                </div>
+                <div class="stat-pill">
+                    <span>🎓</span> Silibus: <span class="highlight">Pendidikan Islam Tingkatan 4 & 5</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Penapis Kategori & Carian Segera -->
+        <section class="museum-filter-section">
+            <div class="filter-glass-container">
+                <div class="filter-buttons-scroll" role="tablist">
+                    <button class="museum-cat-btn active" data-cat="all">🌟 Semua Koleksi (10)</button>
+                    <button class="museum-cat-btn" data-cat="astronomi">🔭 Astronomi & Falak</button>
+                    <button class="museum-cat-btn" data-cat="ekonomi">🪙 Mata Wang & Ekonomi</button>
+                    <button class="museum-cat-btn" data-cat="manuskrip">📜 Manuskrip & Matematik</button>
+                    <button class="museum-cat-btn" data-cat="perubatan">🩺 Perubatan & Bimaristan</button>
+                    <button class="museum-cat-btn" data-cat="sains">🔍 Sains Fizik & Optik</button>
+                    <button class="museum-cat-btn" data-cat="pentadbiran">👑 Pentadbiran & Mohor</button>
+                    <button class="museum-cat-btn" data-cat="seni">🏺 Seni Kraf & Seramik</button>
+                    <button class="museum-cat-btn" data-cat="tentera">⚔️ Ketenteraan & Besi</button>
+                    <button class="museum-cat-btn" data-cat="kejuruteraan">⚙️ Robotik & Automata</button>
+                </div>
+
+                <div class="search-box-wrap">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="search-artifacts" class="search-input" placeholder="Cari nama artifak, tokoh, bahan..." autocomplete="off">
+                </div>
+            </div>
+        </section>
+
+        <!-- Grid Kad Artifak Interaktif -->
+        <section class="museum-grid-section">
+            <div id="artifacts-grid" class="artifacts-grid">
+                <!-- Dijana Secara Dinamik oleh Assets/js/galeri.js -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Bilik Pemeriksaan Interaktif (Chamber Inspection) -->
+    <div id="museum-modal" class="museum-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="dossier-title">
+        <div class="museum-modal-container">
+            <button id="btn-close-modal" class="modal-close-btn" title="Tutup Paparan (Esc)">&times;</button>
+
+            <!-- Bahagian Kiri: Visual Chamber & Hotspots -->
+            <div class="modal-inspection-chamber">
+                <div class="inspection-viewport">
+                    <img id="modal-img" class="modal-artifact-img" src="" alt="Artifak Abbasiyah">
+                    <div id="hotspots-layer" class="hotspots-layer">
+                        <!-- Titik panas dijana secara automatik -->
+                    </div>
+                </div>
+
+                <!-- Kawalan Interaktif Bilik -->
+                <div class="chamber-controls-bar">
+                    <button id="btn-zoom-in" class="chamber-btn" title="Kanta Zoom Dekat">
+                        <span>🔍+</span> Zoom
+                    </button>
+                    <button id="btn-zoom-out" class="chamber-btn" title="Kanta Zoom Jauh">
+                        <span>🔍-</span> Reset
+                    </button>
+                    <button id="btn-rotate-view" class="chamber-btn" title="Putar Kedudukan Sudut">
+                        <span>🔄</span> Putar 90°
+                    </button>
+                </div>
+                <p style="font-size:0.75rem; color:#64748B; margin-top:10px; text-align:center;">
+                    💡 <em>Klik pada titik bernombor kuning di atas gambar untuk melihat komponen rahsia artifak.</em>
+                </p>
+            </div>
+
+            <!-- Bahagian Kanan: Dossier Kurator & Silibus SPM -->
+            <div class="modal-curator-dossier">
+                <div class="dossier-tag-row">
+                    <span id="dossier-category" class="dossier-tag">Kategori</span>
+                    <span style="font-size:0.75rem; color:#64748B;">• Arkib Madinat al-Salam</span>
+                </div>
+
+                <div id="dossier-title-ar" class="dossier-title-ar"></div>
+                <h2 id="dossier-title" class="dossier-title">Nama Artifak</h2>
+
+                <!-- Jadual Spesifikasi -->
+                <div class="dossier-specs-table">
+                    <div class="dossier-spec-item">
+                        <span class="ds-label">Tarikh / Era</span>
+                        <span id="dossier-year" class="ds-value">-</span>
+                    </div>
+                    <div class="dossier-spec-item">
+                        <span class="ds-label">Lokasi Asal</span>
+                        <span id="dossier-origin" class="ds-value">-</span>
+                    </div>
+                    <div class="dossier-spec-item">
+                        <span class="ds-label">Pencipta / Naungan</span>
+                        <span id="dossier-creator" class="ds-value">-</span>
+                    </div>
+                    <div class="dossier-spec-item">
+                        <span class="ds-label">Bahan Buatan</span>
+                        <span id="dossier-material" class="ds-value">-</span>
+                    </div>
+                </div>
+
+                <!-- Kad Maklumat Titik Panas Yang Dipilih -->
+                <div id="hotspot-info-box" class="hotspot-card-box">
+                    <div id="hcb-title" class="hcb-title">📍 Maklumat Komponen</div>
+                    <p id="hcb-desc" class="hcb-desc">Pilih mana-mana titik kuning pada gambar di sebelah untuk membaca kupasan terperinci.</p>
+                </div>
+
+                <!-- Artikel Naratif Kurator -->
+                <div class="dossier-article-wrap">
+                    <h4 style="font-size:0.8rem; color:#D4AF37; text-transform:uppercase; letter-spacing:0.8px; margin:0 0 6px;">📜 Catatan Sejarah & Penyelidikan:</h4>
+                    <p id="dossier-article" class="dossier-article">Huraian terperinci artifak.</p>
+                </div>
+
+                <!-- Kaitan Silibus SPM / KSSM Tingkatan 4 & 5 -->
+                <div class="spm-value-box">
+                    <h4><span>📘</span> Kaitan Silibus SPM (Pendidikan Islam)</h4>
+                    <p id="dossier-spm">Penerangan bab dan topik soalan peperiksaan berkaitan artifak ini.</p>
+                </div>
+
+                <!-- Bar Navigasi Antara Artifak -->
+                <div class="modal-nav-row">
+                    <button id="btn-prev-artifact" class="modal-nav-btn">← Artifak Sebelum</button>
+                    <span style="font-size:0.75rem; color:#64748B;">Gunakan kekunci ⬅️ / ➡️ atau Esc</span>
+                    <button id="btn-next-artifact" class="modal-nav-btn">Artifak Seterusnya →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Muzium -->
+    <footer style="position:relative; z-index:10; border-top:1px solid rgba(212,175,55,0.2); padding:35px 20px; text-align:center; background:rgba(4,8,18,0.95); margin-top:80px;">
+        <div style="max-width:800px; margin:0 auto;">
+            <p style="font-family:'Cinzel', serif; font-size:1.1rem; color:#D4AF37; margin:0 0 8px; font-weight:700;">
+                SIRA<span style="color:#FFF;">HABLE</span> V2 • KHAZANAH TAMADUN ISLAM
+            </p>
+            <p style="font-size:0.82rem; color:#64748B; margin:0 0 16px;">
+                Platform Pembelajaran Gamifikasi & Muzium Digital Interaktif Sejarah Kerajaan Abbasiyah Silibus KSSM Tingkatan 4.
+            </p>
+            <div style="display:flex; justify-content:center; gap:16px; font-size:0.8rem;">
+                <a href="index.html" style="color:#94A3B8; text-decoration:none;">Laman Utama</a>
+                <span style="color:#475569;">•</span>
+                <a href="belajar.html" style="color:#94A3B8; text-decoration:none;">Modul Pembelajaran</a>
+                <span style="color:#475569;">•</span>
+                <a href="quiz.html" style="color:#94A3B8; text-decoration:none;">Simulasi Peperiksaan</a>
+                <span style="color:#475569;">•</span>
+                <a href="dashboard.html" style="color:#94A3B8; text-decoration:none;">Dashboard Pelajar</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Skrip Pengendali Galeri -->
+    <script src="Assets/js/sound-effects.js"></script>
+    <script src="Assets/js/galeri.js"></script>
+</body>
+</html>
